@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyBike</string>
+    <string name="NoBikeText">You don\'t have any bike added yet.
+        Add your first bike and start register
+        your rides in order to keep your bike
+        service cycles up to date.
+    </string>
 </resources>
