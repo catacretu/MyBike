@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.example.mybike.components.BottomBar
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.White
 
@@ -24,7 +25,7 @@ fun SettingsScreen(navController: NavController) {
             )
         },
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomBar(navController = navController)
         }) {
         ConstraintLayout(
             modifier = Modifier

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -23,15 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.mybike.BottomNavItem
 import com.example.mybike.R
+import com.example.mybike.components.BottomBar
 import com.example.mybike.ui.theme.Black
-import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
-import com.example.mybike.ui.theme.SelectedIconColor
 import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -45,7 +39,7 @@ fun BikeScreen(navController: NavController) {
             )
         },
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomBar(navController = navController)
         }) {
 
         ConstraintLayout(
@@ -79,8 +73,9 @@ fun BikeScreen(navController: NavController) {
                     painter = painterResource(id = R.drawable.curved_dotted_line),
                     contentDescription = "",
                     Modifier
-                        .padding(start = 45.dp)
                         .height(285.dp)
+                        .padding(start = 45.dp)
+
                 )
                 Text(
                     text = stringResource(R.string.NoBikeText),
@@ -111,50 +106,3 @@ fun BikeScreen(navController: NavController) {
     }
 }
 
-@Composable
-fun BottomNavigation(navController: NavController) {
-    val items = listOf(
-        BottomNavItem.Bikes,
-        BottomNavItem.Rides,
-        BottomNavItem.Settings
-    )
-    BottomNavigation(
-        backgroundColor = GreyBlue,
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
-        items.forEach { screen ->
-            BottomNavigationItem(
-                icon = {
-                    Icon(
-                        painterResource(id = screen.icon),
-                        contentDescription = screen.title
-                    )
-                },
-                label = {
-                    Text(
-                        text = screen.title,
-                        fontSize = 12.sp
-                    )
-                },
-                selectedContentColor = SelectedIconColor,
-                unselectedContentColor = White,
-                alwaysShowLabel = true,
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                onClick = {
-                    navController.navigate(screen.route) {
-
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        // Avoid multiple copies of the same destination when
-                        // reselecting the same item
-                        launchSingleTop = true
-                        // Restore state when reselecting a previously selected item
-                        restoreState = true
-                    }
-                }
-            )
-        }
-    }
-}
