@@ -36,7 +36,7 @@ fun SplashScreen(navController: NavController) {
                 })
         )
         delay(1000L)
-        navController.navigate("home_screen")
+        navController.navigate("bike_screen")
     }
 
     // Image

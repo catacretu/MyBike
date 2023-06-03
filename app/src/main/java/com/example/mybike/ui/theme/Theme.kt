@@ -56,15 +56,13 @@ fun MyBikeTheme(
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
-//        val systemUiController = rememberSystemUiController()
+
         SideEffect {
             val window = (view.context as Activity).window
-
             val windowInsetsController = WindowCompat.getInsetsController(window, view)
             windowInsetsController.hide(WindowInsetsCompat.Type.statusBars())
             windowInsetsController.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-//            systemUiController.setStatusBarColor(color = Color.Transparent)
             windowInsetsController.isAppearanceLightStatusBars = darkTheme
         }
     }

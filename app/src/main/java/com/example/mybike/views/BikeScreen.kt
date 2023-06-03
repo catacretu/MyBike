@@ -23,17 +23,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.mybike.BottomNavItem
 import com.example.mybike.R
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
+import com.example.mybike.ui.theme.SelectedIconColor
 import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController) {
+fun BikeScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -117,34 +120,37 @@ fun BottomNavigation(navController: NavController) {
     )
     BottomNavigation(
         backgroundColor = GreyBlue,
-        contentColor = White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
+        val currentDestination = navBackStackEntry?.destination
+        items.forEach { screen ->
             BottomNavigationItem(
-                icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
+                icon = {
+                    Icon(
+                        painterResource(id = screen.icon),
+                        contentDescription = screen.title
+                    )
+                },
                 label = {
                     Text(
-                        text = item.title,
+                        text = screen.title,
                         fontSize = 12.sp
                     )
                 },
-//                selectedContentColor = White,
-//                unselectedContentColor = Color.Black.copy(0.4f),
+                selectedContentColor = SelectedIconColor,
+                unselectedContentColor = White,
                 alwaysShowLabel = true,
-                selected = currentRoute == item.screen_route,
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
-                    navController.navigate(item.screen_route) {
+                    navController.navigate(screen.route) {
 
-                        navController.graph.startDestinationRoute?.let { screen_route ->
-                            popUpTo(screen_route) {
-                                saveState = true
-                            }
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
-                        //Single Top means that if you launch an activity
-                        // that is already on top, it wont be created again just resumed.
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
                         launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
                         restoreState = true
                     }
                 }

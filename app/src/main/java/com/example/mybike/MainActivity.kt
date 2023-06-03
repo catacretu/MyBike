@@ -11,7 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mybike.ui.theme.MyBikeTheme
-import com.example.mybike.views.HomeScreen
+import com.example.mybike.views.BikeScreen
+import com.example.mybike.views.RideScreen
+import com.example.mybike.views.SettingsScreen
 import com.example.mybike.views.SplashScreen
 
 class MainActivity : ComponentActivity() {
@@ -49,8 +51,14 @@ fun NavigationGraph() {
             SplashScreen(navController = navController)
         }
 
-        composable("home_screen") {
-            HomeScreen(navController = navController)
+        composable("bike_screen") {
+            BikeScreen(navController = navController)
+        }
+        composable("ride_screen") {
+            RideScreen(navController = navController)
+        }
+        composable("settings_screen") {
+            SettingsScreen(navController = navController)
         }
     }
 }
