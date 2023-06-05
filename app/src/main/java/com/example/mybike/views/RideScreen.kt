@@ -72,7 +72,11 @@ fun RideScreen(navController: NavController) {
             )
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("add_ride_screen") {
+                        popUpTo("ride_screen")
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp)
@@ -80,7 +84,10 @@ fun RideScreen(navController: NavController) {
                         top.linkTo(dotLine.bottom, 10.dp)
                         start.linkTo(parent.start)
                     },
-                colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = LightBlue,
+                    contentColor = White
+                ),
             ) {
                 Text("Add Ride")
             }

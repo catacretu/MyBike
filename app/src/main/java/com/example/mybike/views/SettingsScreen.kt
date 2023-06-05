@@ -3,6 +3,7 @@ package com.example.mybike.views
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -12,9 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.components.BottomBar
-import com.example.mybike.components.OptionalTextField
-import com.example.mybike.components.RequiredField
+import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
+import com.example.mybike.components.TextFieldWithIcon
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.White
 
@@ -43,7 +44,7 @@ fun SettingsScreen(navController: NavController) {
                 switchButton,
                 defaultBike) = createRefs()
 
-            RequiredField(fieldName = "Distance Units",
+            DropDownField(fieldName = "Distance Units",
                 listOfItems = arrayOf("KM", "Mi"),
                 modifier = Modifier
                     .constrainAs(distanceUnitField) {
@@ -51,13 +52,16 @@ fun SettingsScreen(navController: NavController) {
                         start.linkTo(parent.start)
                     }
             )
-            OptionalTextField(
+            TextFieldWithIcon(
                 fieldName = "Service Reminder",
-                modifier = Modifier
+                fieldValue = "100km",
+                withIcon = false,
+                modifierLayout = Modifier
                     .constrainAs(serviceReminderTextField) {
                         top.linkTo(distanceUnitField.bottom, 10.dp)
                         start.linkTo(parent.start)
-                    }
+                    },
+                modifierTextField = Modifier.requiredWidth(360.dp)
             )
 
             SwitchButton(modifier = Modifier
@@ -66,7 +70,7 @@ fun SettingsScreen(navController: NavController) {
                     start.linkTo(serviceReminderTextField.end)
                 })
 
-            RequiredField(fieldName = "Default Bike",
+            DropDownField(fieldName = "Default Bike",
                 listOfItems = arrayOf("KM", "Mi"),
                 modifier = Modifier
                     .constrainAs(defaultBike) {

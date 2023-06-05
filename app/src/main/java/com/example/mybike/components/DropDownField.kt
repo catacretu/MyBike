@@ -19,7 +19,7 @@ import com.example.mybike.R
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun RequiredField(
+fun DropDownField(
     fieldName: String,
     listOfItems: Array<String>,
     modifier: Modifier
@@ -67,9 +67,10 @@ fun RequiredField(
                 ),
             modifierDropDownList = Modifier
                 .constrainAs(distanceUnitList) {
-                    top.linkTo(distanceUnitText.bottom, 10.dp)
+                    top.linkTo(distanceUnitText.bottom, 5.dp)
                     start.linkTo(parent.start)
                 }
         )
     }
+
 }

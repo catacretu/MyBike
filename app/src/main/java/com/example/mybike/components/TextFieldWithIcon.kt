@@ -4,34 +4,43 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.example.mybike.R
+import com.example.mybike.ui.theme.Beige
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun OptionalTextField(
+fun TextFieldWithIcon(
     fieldName: String,
-    modifier: Modifier
+    fieldValue: String,
+    withIcon: Boolean = true,
+    measureUnit: String = "",
+    modifierLayout: Modifier,
+    modifierTextField: Modifier
 ) {
     ConstraintLayout(
-        modifier = modifier
+        modifier = modifierLayout
 
     ) {
-        val (serviceReminderText,
-            serviceReminderTextField) = createRefs()
+        val (textLabel,
+            iconRequired,
+            textField) = createRefs()
 
         val customTextSelectionColors = TextSelectionColors(
             handleColor = LightBlue,
@@ -43,27 +52,50 @@ fun OptionalTextField(
             color = White,
             modifier = Modifier
                 .padding(start = 1.dp)
-                .constrainAs(serviceReminderText) {
+                .constrainAs(textLabel) {
                     top.linkTo(parent.top, 15.dp)
                     start.linkTo(parent.start, 10.dp)
                 }
         )
+        if (withIcon) {
+            Icon(
+                painterResource(
+                    id = R.drawable.icon_required
+                ),
+                contentDescription = "",
+                tint = Color.Unspecified,
+                modifier = Modifier
+                    .constrainAs(iconRequired) {
+                        top.linkTo(parent.top, 15.dp)
+                        start.linkTo(textLabel.end, 1.dp)
+                    })
+        }
 
         CompositionLocalProvider(
             LocalTextSelectionColors provides customTextSelectionColors
         ) {
-            TextField(value = "100km",
+            TextField(
+                value = fieldValue,
                 onValueChange = {},
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = GreyBlue,
                     textColor = White,
                     cursorColor = LightBlue,
-                    leadingIconColor = LightBlue,
+                    trailingIconColor = Beige,
                     focusedIndicatorColor = LightBlue,
                     disabledIndicatorColor = GreyBlue
                 ),
-                modifier = Modifier
-                    .requiredWidth(360.dp)
+                trailingIcon = {
+                    Text(
+                        measureUnit,
+                        modifier =
+                        Modifier
+                            .padding(end = 10.dp)
+                    )
+                },
+
+                modifier = modifierTextField
+
                     .height(50.dp)
                     .padding(
                         start = 10.dp,
@@ -73,8 +105,8 @@ fun OptionalTextField(
                         BorderStroke(0.1.dp, White),
                         RoundedCornerShape(4.dp)
                     )
-                    .constrainAs(serviceReminderTextField) {
-                        top.linkTo(serviceReminderText.bottom, 10.dp)
+                    .constrainAs(textField) {
+                        top.linkTo(textLabel.bottom, 5.dp)
                         start.linkTo(parent.start)
                     }
             )

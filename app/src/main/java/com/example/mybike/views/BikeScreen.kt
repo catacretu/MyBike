@@ -97,7 +97,10 @@ fun BikeScreen(navController: NavController) {
                         top.linkTo(dotLineBoxWithText.bottom, 10.dp)
                         start.linkTo(parent.start)
                     },
-                colors = ButtonDefaults.buttonColors(backgroundColor = LightBlue),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = LightBlue,
+                    contentColor = White
+                ),
             ) {
                 Text("Add Bike")
             }
