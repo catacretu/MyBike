@@ -89,7 +89,11 @@ fun BikeScreen(navController: NavController) {
                 )
             }
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("add_bike_screen") {
+                        popUpTo("bike_screen")
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp)

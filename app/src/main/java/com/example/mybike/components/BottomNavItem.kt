@@ -1,4 +1,6 @@
-package com.example.mybike
+package com.example.mybike.components
+
+import com.example.mybike.R
 
 sealed class BottomNavItem(val title: String, val icon: Int, val route: String) {
 

@@ -26,7 +26,7 @@ import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun TextFieldWithIcon(
+fun TextFieldWithRequiredIcon(
     fieldName: String,
     fieldValue: String,
     withIcon: Boolean = true,
@@ -95,7 +95,6 @@ fun TextFieldWithIcon(
                 },
 
                 modifier = modifierTextField
-
                     .height(50.dp)
                     .padding(
                         start = 10.dp,

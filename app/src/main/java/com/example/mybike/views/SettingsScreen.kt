@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import com.example.mybike.components.BottomBar
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
-import com.example.mybike.components.TextFieldWithIcon
+import com.example.mybike.components.TextFieldWithRequiredIcon
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.White
 
@@ -52,7 +52,7 @@ fun SettingsScreen(navController: NavController) {
                         start.linkTo(parent.start)
                     }
             )
-            TextFieldWithIcon(
+            TextFieldWithRequiredIcon(
                 fieldName = "Service Reminder",
                 fieldValue = "100km",
                 withIcon = false,

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mybike.views.AddBikeScreen
 import com.example.mybike.views.AddRideScreen
 import com.example.mybike.views.BikeScreen
 import com.example.mybike.views.RideScreen
@@ -24,6 +25,9 @@ fun NavigationGraph() {
 
         composable("bike_screen") {
             BikeScreen(navController = navController)
+        }
+        composable("add_bike_screen") {
+            AddBikeScreen(navController = navController)
         }
         composable("ride_screen") {
             RideScreen(navController = navController)
