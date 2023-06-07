@@ -72,6 +72,8 @@ dependencies {
     implementation 'androidx.compose.runtime:runtime-livedata'
     //Date picker
     implementation "io.github.vanpra.compose-material-dialogs:core:0.9.0"
+    //Dots indicator
+    implementation 'com.google.accompanist:accompanist-pager:0.22.0-rc'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

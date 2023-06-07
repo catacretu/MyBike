@@ -2,6 +2,7 @@ package com.example.mybike.views
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -27,6 +32,7 @@ import com.example.mybike.components.ColorsList
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
@@ -59,11 +65,13 @@ fun AddBikeScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
+            var selectedColor by remember { mutableStateOf(BikeRed) }
             val (bikeBox,
                 colorsList,
                 bike,
                 bikeNameLabel,
                 bikeNameField,
+                backgroundHalfColor,
                 wheelSizeField,
                 serviceInField,
                 defaultBikeField,
@@ -78,13 +86,25 @@ fun AddBikeScreen(navController: NavController) {
                     start.linkTo(parent.start)
                 }) {
 
-                ColorsList(modifier = Modifier
-                    .padding(top = 10.dp)
-                    .constrainAs(colorsList) {
-                        top.linkTo(parent.top)
+                Box(modifier = Modifier
+                    .background(GreyBlue)
+                    .fillMaxWidth()
+                    .height(150.dp)
+                    .constrainAs(backgroundHalfColor) {
+                        bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
                     })
-                BikeBuilder(bikeType = BikeType.RoadBike,
+
+                ColorsList(
+//                    onClick = {selectedColor = ColorsList.},
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .constrainAs(colorsList) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                        })
+
+                BikeBuilder(bikeType = BikeType.MTBike,
                     size = 275.dp,
                     modifier = Modifier
                         .constrainAs(bike) {
@@ -92,7 +112,8 @@ fun AddBikeScreen(navController: NavController) {
                             centerHorizontallyTo(parent, 0.45f)
 
                         })
-                Text(text = "Road Bike",
+                Text(
+                    text = "Road Bike",
                     color = White,
                     fontSize = 15.sp,
                     modifier = Modifier
@@ -164,7 +185,7 @@ fun AddBikeScreen(navController: NavController) {
                     contentColor = White
                 ),
             ) {
-                Text("Add Button")
+                Text("Add Bike")
             }
 
         }

@@ -15,7 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
@@ -50,6 +52,7 @@ fun DropDownList(
         TextField(
             value = selectedItem,
             onValueChange = {},
+            textStyle = TextStyle.Default.copy(fontSize = 14.sp),
             readOnly = true,
             modifier = modifierTextField,
             shape = RoundedCornerShape(4.dp),

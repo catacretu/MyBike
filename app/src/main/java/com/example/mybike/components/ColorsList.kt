@@ -13,15 +13,17 @@ import androidx.compose.ui.unit.dp
 import com.example.mybike.ui.theme.bikeColors
 
 @Composable
-fun ColorsList(modifier: Modifier) {
-
+fun ColorsList(
+    modifier: Modifier,
+//               onClick: () -> Unit
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier
     ) {
         items(bikeColors.size) { index ->
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {},
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = bikeColors.keys.elementAt(index)
                 ),

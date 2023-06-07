@@ -15,6 +15,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -50,24 +51,26 @@ fun RideScreen(navController: NavController) {
             painterResource(id = R.drawable.missing_ride_card),
                 contentDescription = "",
                 Modifier
-                    .padding(end = 10.dp)
-                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .width(400.dp)
+                    .height(200.dp)
                     .constrainAs(missingRideCard) {
                         top.linkTo(parent.top, 5.dp)
-                        start.linkTo(parent.start, 5.dp)
+                        start.linkTo(parent.start)
                     }
             )
             Image(
                 painter = painterResource(id = R.drawable.curved_dotted_line),
                 contentDescription = "",
                 Modifier
-                    .width(200.dp)
-                    .height(500.dp)
-//                    .size(400.dp)
+                    .scale(1.21f)
+//                    .width(240.dp)
+                    .height(470.dp)
+//                    .background(DarkBlue)
                     .constrainAs(dotLine) {
-                        top.linkTo(missingRideCard.bottom, 5.dp)
+                        top.linkTo(missingRideCard.bottom, (-45).dp)
                         start.linkTo(missingRideCard.start, 10.dp)
-                        centerHorizontallyTo(parent, bias = 0.03F)
+                        centerHorizontallyTo(parent, bias = 0.11F)
                     }
             )
 
@@ -81,7 +84,7 @@ fun RideScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp)
                     .constrainAs(addRideButton) {
-                        top.linkTo(dotLine.bottom, 10.dp)
+                        bottom.linkTo(parent.bottom, 80.dp)
                         start.linkTo(parent.start)
                     },
                 colors = ButtonDefaults.buttonColors(

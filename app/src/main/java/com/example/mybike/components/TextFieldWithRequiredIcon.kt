@@ -16,6 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -77,6 +78,7 @@ fun TextFieldWithRequiredIcon(
             TextField(
                 value = fieldValue,
                 onValueChange = {},
+                textStyle = TextStyle.Default.copy(fontSize = 14.sp),
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = GreyBlue,
                     textColor = White,
@@ -90,7 +92,8 @@ fun TextFieldWithRequiredIcon(
                         measureUnit,
                         modifier =
                         Modifier
-                            .padding(end = 10.dp)
+                            .padding(end = 10.dp),
+                        fontSize = 14.sp
                     )
                 },
 

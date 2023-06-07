@@ -14,7 +14,12 @@ import androidx.compose.ui.unit.dp
 import com.example.mybike.ui.theme.BikeRed
 
 @Composable
-fun BikeBuilder(bikeType: BikeType, size: Dp, modifier: Modifier) {
+fun BikeBuilder(
+    bikeType: BikeType,
+    size: Dp,
+//                selectedColor: Color,
+    modifier: Modifier
+) {
 
     Box(
         modifier = modifier
