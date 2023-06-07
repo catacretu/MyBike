@@ -18,6 +18,7 @@ val SelectedIconColor = Color(0xFF4589FF)
 val GreyBlue = Color(0xFF222C48)
 val GreyProgressBar = Color(0xFF364673)
 val Grey = Color(0xFF5A6C9E)
+val MonthGrey = Color(0xFF7B8AB1)
 val Beige = Color(0xFFA6A6A6)
 val DarkBlue = Color(0xFF121726)
 

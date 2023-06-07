@@ -8,6 +8,7 @@ import com.example.mybike.views.AddBikeScreen
 import com.example.mybike.views.AddRideScreen
 import com.example.mybike.views.BikeScreen
 import com.example.mybike.views.EmptyBikeScreen
+import com.example.mybike.views.EmptyRideScreen
 import com.example.mybike.views.RideScreen
 import com.example.mybike.views.SettingsScreen
 import com.example.mybike.views.SplashScreen
@@ -32,6 +33,9 @@ fun NavigationGraph() {
         }
         composable("add_bike_screen") {
             AddBikeScreen(navController = navController)
+        }
+        composable("empty_ride_screen") {
+            EmptyRideScreen(navController = navController)
         }
         composable("ride_screen") {
             RideScreen(navController = navController)

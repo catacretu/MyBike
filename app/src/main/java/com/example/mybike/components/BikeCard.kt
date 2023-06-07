@@ -12,6 +12,8 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.StrokeCap
@@ -47,6 +49,8 @@ fun BikeCard() {
             bikeServiceIn,
             progressBar) = createRefs()
 
+        val menuState = remember { mutableStateOf(false) }
+
         Box(modifier = Modifier
             .background(GreyBlue)
             .fillMaxWidth()
@@ -55,10 +59,11 @@ fun BikeCard() {
                 bottom.linkTo(parent.bottom)
                 start.linkTo(parent.start)
             })
-        IconButton(onClick = {}, modifier = Modifier.constrainAs(moreButton) {
-            top.linkTo(parent.top)
-            end.linkTo(parent.end)
-        }
+        IconButton(onClick = { menuState.value = !menuState.value },
+            modifier = Modifier.constrainAs(moreButton) {
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+            }
         ) {
             Icon(
                 painterResource(
@@ -68,6 +73,7 @@ fun BikeCard() {
                 tint = White
             )
         }
+        MoreMenu(menuState = menuState)
 
         BikeBuilder(bikeType = BikeType.MTBike,
             size = 275.dp,
