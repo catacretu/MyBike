@@ -7,29 +7,29 @@ import com.example.mybike.data.repository.RideRepository
 import com.example.mybike.data.repository.RideRepositoryImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-class AppModule(private val context: Context) {
+@InstallIn(ViewModelComponent::class)
+object AppModule {
 
-    @Singleton
+    @ViewModelScoped
     @Provides
-    fun provideContext() = context
-
-    @Singleton
-    @Provides
-    fun provideAppDatabase(context: Context): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getAppDatabase(context)
     }
 
-    @Singleton
     @Provides
+    @ViewModelScoped
     fun provideRideDAO(appDatabase: AppDatabase): RideDAO {
         return appDatabase.getRideDAO()
     }
 
-    @Singleton
     @Provides
+    @ViewModelScoped
     fun provideRideRepository(rideDAO: RideDAO): RideRepository {
         return RideRepositoryImpl(rideDAO)
     }
