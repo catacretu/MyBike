@@ -8,9 +8,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.mybike.components.NavigationGraph
 import com.example.mybike.ui.theme.MyBikeTheme
+import dagger.android.AndroidInjection
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContent {
             MyBikeTheme {
@@ -24,10 +26,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun SplashScreenPreview() {
-//    MyBikeTheme {
-//        Greeting("Android")
-//    }
-//}
