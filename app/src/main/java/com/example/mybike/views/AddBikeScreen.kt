@@ -15,10 +15,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -65,7 +63,7 @@ fun AddBikeScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
-            var selectedColor by remember { mutableStateOf(BikeRed) }
+            val selectedColor = remember { mutableStateOf(BikeRed) }
             val (bikeBox,
                 colorsList,
                 bike,
@@ -96,7 +94,7 @@ fun AddBikeScreen(navController: NavController) {
                     })
 
                 ColorsList(
-//                    onClick = {selectedColor = ColorsList.},
+                    selectedColor = selectedColor,
                     modifier = Modifier
                         .padding(top = 10.dp)
                         .constrainAs(colorsList) {
@@ -106,6 +104,7 @@ fun AddBikeScreen(navController: NavController) {
 
                 BikeBuilder(bikeType = BikeType.MTBike,
                     size = 275.dp,
+                    bikeColor = selectedColor.value,
                     modifier = Modifier
                         .constrainAs(bike) {
                             centerVerticallyTo(parent)

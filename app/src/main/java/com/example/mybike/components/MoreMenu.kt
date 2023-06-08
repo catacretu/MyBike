@@ -20,8 +20,12 @@ import com.example.mybike.ui.theme.Grey
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun MoreMenu(menuState: MutableState<Boolean>) {
+fun MoreMenu(
+    menuState: MutableState<Boolean>,
+    openDialog: MutableState<Boolean>
+) {
     // a boolean variable which store the display menu state
+    DeleteAlertDialog(openDialog)
     DropdownMenu(
         expanded = menuState.value,
         onDismissRequest = { menuState.value = false },
@@ -50,7 +54,10 @@ fun MoreMenu(menuState: MutableState<Boolean>) {
             )
         }
         DropdownMenuItem(
-            onClick = {}, modifier = Modifier
+            onClick = {
+                menuState.value = !menuState.value
+                openDialog.value = !openDialog.value
+            }, modifier = Modifier
                 .width(90.dp)
                 .height(30.dp)
         ) {

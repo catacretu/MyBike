@@ -14,13 +14,14 @@ val Pink40 = Color(0xFF7D5260)
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
 val LightBlue = Color(0xFF0066F5)
-val SelectedIconColor = Color(0xFF4589FF)
+val OceanBlueColor = Color(0xFF4589FF)
 val GreyBlue = Color(0xFF222C48)
 val GreyProgressBar = Color(0xFF364673)
 val Grey = Color(0xFF5A6C9E)
 val MonthGrey = Color(0xFF7B8AB1)
 val Beige = Color(0xFFA6A6A6)
 val DarkBlue = Color(0xFF121726)
+
 
 //Bike Colors
 val bikeColors = mapOf(

@@ -1,7 +1,7 @@
 package com.example.mybike.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -18,14 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.mybike.R
+import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.DarkBlue
-import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.GreyProgressBar
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
@@ -41,7 +44,7 @@ fun BikeCard() {
             .heightIn(min = 310.dp)
             .background(DarkBlue)
     ) {
-        val (backgroundHalfColor,
+        val (backgroundWave,
             moreButton,
             bike,
             bikeName,
@@ -50,15 +53,18 @@ fun BikeCard() {
             progressBar) = createRefs()
 
         val menuState = remember { mutableStateOf(false) }
+        val openDialog = remember { mutableStateOf(false) }
 
-        Box(modifier = Modifier
-            .background(GreyBlue)
-            .fillMaxWidth()
-            .height(150.dp)
-            .constrainAs(backgroundHalfColor) {
-                bottom.linkTo(parent.bottom)
-                start.linkTo(parent.start)
-            })
+        Image(painter = painterResource(id = R.drawable.wave),
+            contentDescription = "wave",
+            modifier = Modifier
+                .height(189.dp)
+                .fillMaxWidth()
+                .constrainAs(backgroundWave) {
+                    start.linkTo(parent.start)
+                    bottom.linkTo(parent.bottom)
+                })
+
         IconButton(onClick = { menuState.value = !menuState.value },
             modifier = Modifier.constrainAs(moreButton) {
                 top.linkTo(parent.top)
@@ -73,10 +79,11 @@ fun BikeCard() {
                 tint = White
             )
         }
-        MoreMenu(menuState = menuState)
+        MoreMenu(menuState = menuState, openDialog = openDialog)
 
         BikeBuilder(bikeType = BikeType.MTBike,
             size = 275.dp,
+            bikeColor = BikeRed,
             modifier = Modifier
                 .constrainAs(bike) {
                     centerVerticallyTo(parent, 0.2f)
@@ -93,19 +100,28 @@ fun BikeCard() {
             }
         )
 
-        Text(text = "Wheels: 29\"",
+        Text(
+            buildAnnotatedString {
+                append("Wheels: ")
+                withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
+                    append("29\"")
+                }
+            },
             color = White,
             fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
             modifier = Modifier.constrainAs(bikeWheelsSize) {
                 top.linkTo(bikeName.bottom)
                 start.linkTo(parent.start, 15.dp)
             }
         )
-        Text(text = "Service in 170km",
+        Text(buildAnnotatedString {
+            append("Service in: ")
+            withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
+                append("170km")
+            }
+        },
             color = White,
             fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
             modifier = Modifier.constrainAs(bikeServiceIn) {
                 top.linkTo(bikeWheelsSize.bottom)
                 start.linkTo(parent.start, 15.dp)

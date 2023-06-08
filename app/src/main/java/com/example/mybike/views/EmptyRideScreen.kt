@@ -48,7 +48,7 @@ fun EmptyRideScreen(navController: NavController) {
         {
             val (missingRideCard, dotLine, addRideButton) = createRefs()
             Image(painter =
-            painterResource(id = R.drawable.missing_ride_card),
+            painterResource(id = R.drawable.missing_ride),
                 contentDescription = "",
                 Modifier
                     .padding(10.dp)

@@ -31,6 +31,8 @@ fun RideCard() {
             .background(GreyBlue)
     ) {
         val menuState = remember { mutableStateOf(false) }
+        val openDialog = remember { mutableStateOf(false) }
+
         val (
             title,
             bikeIcon,
@@ -76,7 +78,7 @@ fun RideCard() {
                 tint = White
             )
         }
-        MoreMenu(menuState)
+        MoreMenu(menuState, openDialog)
 
         TextWithValue(label = "Bike: ",
             value = "Nukeproof Scout 290 ",

@@ -13,7 +13,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.mybike.ui.theme.GreyBlue
-import com.example.mybike.ui.theme.SelectedIconColor
+import com.example.mybike.ui.theme.OceanBlueColor
 import com.example.mybike.ui.theme.White
 
 @Composable
@@ -42,7 +42,7 @@ fun BottomBar(navController: NavController) {
                         fontSize = 12.sp
                     )
                 },
-                selectedContentColor = SelectedIconColor,
+                selectedContentColor = OceanBlueColor,
                 unselectedContentColor = White,
                 alwaysShowLabel = true,
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,

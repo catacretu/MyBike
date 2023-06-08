@@ -8,14 +8,16 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.mybike.ui.theme.bikeColors
 
 @Composable
 fun ColorsList(
     modifier: Modifier,
-//               onClick: () -> Unit
+    selectedColor: MutableState<Color>
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
@@ -23,7 +25,7 @@ fun ColorsList(
     ) {
         items(bikeColors.size) { index ->
             Button(
-                onClick = {},
+                onClick = { selectedColor.value = bikeColors.keys.elementAt(index) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = bikeColors.keys.elementAt(index)
                 ),
