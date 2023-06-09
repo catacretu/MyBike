@@ -23,6 +23,7 @@ import com.example.mybike.ui.theme.White
 fun MoreMenu(
     menuState: MutableState<Boolean>,
     openDialog: MutableState<Boolean>,
+    editClick: () -> Unit,
     deleteClick: () -> Unit
 ) {
     DeleteAlertDialog(openDialog)
@@ -34,7 +35,7 @@ fun MoreMenu(
     ) {
 
         DropdownMenuItem(
-            onClick = {}, modifier = Modifier
+            onClick = {editClick()}, modifier = Modifier
                 .width(90.dp)
                 .height(30.dp)
         )

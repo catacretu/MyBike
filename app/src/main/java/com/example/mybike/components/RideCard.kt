@@ -22,6 +22,7 @@ import com.example.mybike.ui.theme.White
 
 @Composable
 fun RideCard(rideEntity: RideEntity,
+             editClick: () -> Unit,
              deleteClick: () -> Unit) {
 
     ConstraintLayout(
@@ -78,7 +79,7 @@ fun RideCard(rideEntity: RideEntity,
                 tint = White
             )
         }
-        MoreMenu(menuState, openDialog,deleteClick)
+        MoreMenu(menuState, openDialog,editClick,deleteClick)
 
         TextWithValue(label = "Bike: ",
             value = rideEntity.bikeName,

@@ -33,9 +33,9 @@ import com.example.mybike.ui.theme.GreyProgressBar
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
-@Preview(showBackground = true)
 @Composable
-fun BikeCard() {
+fun BikeCard(editClick: () -> Unit,
+             deleteClick: () -> Unit) {
 
     ConstraintLayout(
         modifier = Modifier
@@ -79,7 +79,8 @@ fun BikeCard() {
                 tint = White
             )
         }
-//        MoreMenu(menuState = menuState, openDialog = openDialog)
+        MoreMenu(menuState = menuState, openDialog = openDialog,
+            editClick = editClick, deleteClick = deleteClick)
 
         BikeBuilder(bikeType = BikeType.MTBike,
             size = 275.dp,

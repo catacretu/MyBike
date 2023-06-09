@@ -40,15 +40,15 @@ import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddBikeScreen(navController: NavController) {
+fun EditBikeScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Bike", color = White) },
+                title = { Text("Edit Bike", color = White) },
                 backgroundColor = Black,
                 actions = {
                     IconButton(onClick = {navController.navigate("bike_screen"){
-                        popUpTo("add_bike_screen")
+                        popUpTo("edit_bike_screen")
                     }}) {
                         Icon(
                             painterResource(
@@ -114,16 +114,16 @@ fun AddBikeScreen(navController: NavController) {
 
                 LazyRow(modifier = Modifier
                     .constrainAs(bike) {
-                    centerVerticallyTo(parent,0.5f)
-                    centerHorizontallyTo(parent, 0.45f)
-                }
-                    ){
+                        centerVerticallyTo(parent,0.5f)
+                        centerHorizontallyTo(parent, 0.45f)
+                    }
+                ){
                     items(count = listOfBikes.size){index->
                         BikeBuilder(bikeType = listOfBikes[index],
                             size = 275.dp,
                             bikeColor = selectedColor.value,
                             modifier = Modifier
-                                )
+                        )
                     }
                 }
 
@@ -200,7 +200,7 @@ fun AddBikeScreen(navController: NavController) {
                     contentColor = White
                 ),
             ) {
-                Text("Add Bike")
+                Text("Save")
             }
 
         }

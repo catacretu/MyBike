@@ -13,9 +13,10 @@ import com.example.mybike.R
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun AddButtonWithText(text: String) {
+fun AddButtonWithText(text: String,
+                      onClick: () -> Unit) {
 
-    TextButton(onClick = {}) {
+    TextButton(onClick = onClick) {
         Icon(
             painterResource(
                 id = R.drawable.icon_add

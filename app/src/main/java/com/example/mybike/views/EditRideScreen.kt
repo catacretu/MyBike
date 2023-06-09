@@ -28,15 +28,16 @@ import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddRideScreen(navController: NavController) {
+fun EditRideScreen(navController: NavController) {
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Ride", color = White) },
+                title = { Text("Edit Ride", color = White) },
                 backgroundColor = GreyBlue,
                 actions = {
                     IconButton(onClick = {navController.navigate("ride_screen"){
-                        popUpTo("add_ride_screen")
+                        popUpTo("edit_ride_screen")
                     }}) {
                         Icon(
                             painterResource(
@@ -119,7 +120,7 @@ fun AddRideScreen(navController: NavController) {
             Button(
                 onClick = {
                     navController.navigate("ride_screen") {
-                    popUpTo("add_ride_screen")
+                        popUpTo("add_ride_screen")
                     }
                 },
                 modifier = Modifier
@@ -134,8 +135,9 @@ fun AddRideScreen(navController: NavController) {
                     contentColor = White
                 ),
             ) {
-                Text("Add Ride", fontSize = 15.sp)
+                Text("Save", fontSize = 15.sp)
             }
         }
     }
+
 }

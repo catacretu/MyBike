@@ -37,8 +37,11 @@ fun RideScreen(navController: NavController,
                 title = { Title(text = "Rides") },
                 backgroundColor = Black,
                 actions = {
-                    if(rideViewModel.rideData.isEmpty())
-                        AddButtonWithText(text = "Add Ride")}
+                    if(rideViewModel.rideData.isNotEmpty())
+                        AddButtonWithText(text = "Add Ride")
+                        {navController.navigate("add_ride_screen"){
+                            popUpTo("ride_screen")
+                        }}}
             )
         },
         bottomBar = {
@@ -47,12 +50,13 @@ fun RideScreen(navController: NavController,
         if(rideViewModel.rideData.isEmpty())
             EmptyRideScreen(navController = navController, ridesList = rideViewModel.rideData)
         else
-            RideScreenContent(rideViewModel = rideViewModel)
+            RideScreenContent(navController = navController, rideViewModel = rideViewModel)
     }
 }
 
 @Composable
-fun RideScreenContent(rideViewModel: RideViewModel) {
+fun RideScreenContent(navController: NavController
+                      ,rideViewModel: RideViewModel) {
     var ridesList = rideViewModel.rideData
     Column(
         modifier = Modifier
@@ -88,8 +92,12 @@ fun RideScreenContent(rideViewModel: RideViewModel) {
         ) {
 
             items(key = {it},count = ridesList.size) {index->
-                RideCard(ridesList[index]
-                ) { rideViewModel.deleteRide(ridesList[index]) }
+                RideCard(rideEntity = ridesList[index],
+                    editClick = {navController.navigate("edit_ride_screen"){
+                        popUpTo("bike_screen")
+                    }},
+                    deleteClick = {rideViewModel.deleteRide(ridesList[index])})
+
             }
         }
 

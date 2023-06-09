@@ -25,7 +25,11 @@ fun BikeScreen(navController: NavController) {
                 backgroundColor = Black,
                 actions = {
 
-                    AddButtonWithText(text = "Add Bike")
+                    AddButtonWithText(text = "Add Bike"){
+                        navController.navigate("add_bike_screen"){
+                            popUpTo("bike_screen")
+                        }
+                    }
                 }
             )
         },
@@ -40,7 +44,11 @@ fun BikeScreen(navController: NavController) {
         ) {
 
             items(count = 4) {
-                BikeCard()
+                BikeCard(editClick = {
+                    navController.navigate("edit_bike_screen"){
+                        popUpTo("bike_screen")
+                    }
+                }, deleteClick = {})
             }
         }
 
