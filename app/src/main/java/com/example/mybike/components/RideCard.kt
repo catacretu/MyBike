@@ -12,16 +12,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.mybike.R
+import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.White
 
-@Preview(showBackground = true)
+
 @Composable
-fun RideCard() {
+fun RideCard(rideEntity: RideEntity,
+             deleteClick: () -> Unit) {
 
     ConstraintLayout(
         modifier = Modifier
@@ -37,7 +38,6 @@ fun RideCard() {
             title,
             bikeIcon,
             moreButton,
-            moreMenu,
             bikeNameField,
             distanceField,
             durationField,
@@ -56,7 +56,7 @@ fun RideCard() {
                     start.linkTo(parent.start, 15.dp)
                 })
 
-        Title(text = "Friday 29 Ride",
+        Title(text = rideEntity.rideTitle,
             modifier = Modifier
                 .constrainAs(title) {
                     top.linkTo(parent.top, 12.dp)
@@ -78,30 +78,30 @@ fun RideCard() {
                 tint = White
             )
         }
-        MoreMenu(menuState, openDialog)
+        MoreMenu(menuState, openDialog,deleteClick)
 
         TextWithValue(label = "Bike: ",
-            value = "Nukeproof Scout 290 ",
+            value = rideEntity.bikeName,
             modifier = Modifier.constrainAs(bikeNameField) {
                 top.linkTo(title.bottom)
                 start.linkTo(parent.start, 20.dp)
             })
         TextWithValue(label = "Distance: ",
-            value = "60km ",
+            value = rideEntity.distance,
             modifier = Modifier.constrainAs(distanceField) {
                 top.linkTo(bikeNameField.bottom)
                 start.linkTo(parent.start, 20.dp)
             })
 
         TextWithValue(label = "Duration: ",
-            value = "2h, 14 min ",
+            value = rideEntity.duration,
             modifier = Modifier.constrainAs(durationField) {
                 top.linkTo(distanceField.bottom)
                 start.linkTo(parent.start, 20.dp)
             })
 
         TextWithValue(label = "Date: ",
-            value = "29.03.2023 ",
+            value = rideEntity.date,
             modifier = Modifier.constrainAs(dateField) {
                 top.linkTo(durationField.bottom)
                 start.linkTo(parent.start, 20.dp)

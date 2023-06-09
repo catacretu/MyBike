@@ -79,7 +79,7 @@ fun BikeCard() {
                 tint = White
             )
         }
-        MoreMenu(menuState = menuState, openDialog = openDialog)
+//        MoreMenu(menuState = menuState, openDialog = openDialog)
 
         BikeBuilder(bikeType = BikeType.MTBike,
             size = 275.dp,

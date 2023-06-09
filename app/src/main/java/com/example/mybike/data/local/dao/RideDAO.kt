@@ -1,6 +1,7 @@
 package com.example.mybike.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,4 +15,7 @@ interface RideDAO {
 
     @Query("SELECT * FROM ride_table")
     fun getAllRides(): List<RideEntity>
+
+    @Delete
+    fun deleteRide(ride: RideEntity)
 }

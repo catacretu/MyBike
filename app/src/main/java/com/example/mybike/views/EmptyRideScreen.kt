@@ -22,24 +22,26 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.R
 import com.example.mybike.components.BottomBar
+import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun EmptyRideScreen(navController: NavController) {
+fun EmptyRideScreen(navController: NavController,
+                    ridesList: List<RideEntity>) {
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Rides", color = White) },
-                backgroundColor = Black
-            )
-        },
-        bottomBar = {
-            BottomBar(navController = navController)
-        }) {
+//    Scaffold(
+//        topBar = {
+//            TopAppBar(
+//                title = { Text("Rides", color = White) },
+//                backgroundColor = Black
+//            )
+//        },
+//        bottomBar = {
+//            BottomBar(navController = navController)
+//        }) {
         ConstraintLayout(
             modifier = Modifier
                 .background(Black)
@@ -94,4 +96,3 @@ fun EmptyRideScreen(navController: NavController) {
             }
         }
     }
-}

@@ -8,8 +8,8 @@ class RideEntity(
     @PrimaryKey(autoGenerate = true)
     val rideId: Int,
     val rideTitle: String,
-    val bike: String,
-    val distance: Int,
+    val bikeName: String,
+    val distance: String,
     val duration: String,
-    val Date: String
+    val date: String
 )

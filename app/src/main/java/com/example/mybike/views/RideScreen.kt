@@ -24,53 +24,74 @@ import com.example.mybike.components.Title
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.MonthGrey
+import com.example.mybike.viewmodel.RideViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RideScreen(navController: NavController) {
+fun RideScreen(navController: NavController,
+               rideViewModel: RideViewModel) {
+//    val ridesList = rideViewModel.rideData.value
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Title(text = "Rides") },
                 backgroundColor = Black,
                 actions = {
-                    AddButtonWithText(text = "Add Ride")
-                }
+                    if(rideViewModel.rideData.isEmpty())
+                        AddButtonWithText(text = "Add Ride")}
             )
         },
         bottomBar = {
             BottomBar(navController = navController)
         }) {
-        Column(
+        if(rideViewModel.rideData.isEmpty())
+            EmptyRideScreen(navController = navController, ridesList = rideViewModel.rideData)
+        else
+            RideScreenContent(rideViewModel = rideViewModel)
+    }
+}
+
+@Composable
+fun RideScreenContent(rideViewModel: RideViewModel) {
+    var ridesList = rideViewModel.rideData
+    Column(
+        modifier = Modifier
+            .background(Black)
+            .fillMaxSize(),
+    )
+    {
+
+        Box(
             modifier = Modifier
-                .background(Black)
-                .fillMaxSize(),
+                .padding(10.dp)
+                .fillMaxWidth()
+                .height(280.dp)
+                .background(GreyBlue)
         )
-        {
+        Text(
+            text = "March",
+            color = MonthGrey,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(start = 10.dp, bottom = 5.dp)
+        )
 
-            Box(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-                    .height(280.dp)
-                    .background(GreyBlue)
-            )
-            Text(
-                text = "March",
-                color = MonthGrey,
-                fontSize = 20.sp,
-                modifier = Modifier.padding(start = 10.dp, bottom = 5.dp)
-            )
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
+//        LaunchedEffect(rideViewModel.rideData) {
+//            snapshotFlow { rideViewModel.rideData }
+//                .collect { newList ->
+//                     = newList
+//                }
+//        }
 
-                items(count = 4) {
-                    RideCard()
-                }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+
+            items(key = {it},count = ridesList.size) {index->
+                RideCard(ridesList[index]
+                ) { rideViewModel.deleteRide(ridesList[index]) }
             }
-
         }
+
     }
 }

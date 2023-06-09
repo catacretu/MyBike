@@ -10,4 +10,8 @@ class RideRepositoryImpl @Inject constructor(
     override fun getRides(): List<RideEntity> {
         return rideDAO.getAllRides()
     }
+
+    override fun deleteRide(rideEntity: RideEntity) {
+        rideDAO.deleteRide(rideEntity)
+    }
 }
