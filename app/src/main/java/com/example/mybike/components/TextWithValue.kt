@@ -5,6 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.mybike.ui.theme.White
 
@@ -12,17 +13,19 @@ import com.example.mybike.ui.theme.White
 fun TextWithValue(
     label: String,
     value: String,
+    fontSize: TextUnit = 17.sp,
+    fontWeight: FontWeight = FontWeight.SemiBold,
     modifier: Modifier
 ) {
     Row(modifier = modifier) {
 
         Text(
             text = label, color = White,
-            fontSize = 17.sp
+            fontSize = fontSize
         )
         Text(
             text = value, color = White,
-            fontSize = 17.sp, fontWeight = FontWeight.SemiBold
+            fontSize = fontSize, fontWeight = fontWeight
         )
     }
 }

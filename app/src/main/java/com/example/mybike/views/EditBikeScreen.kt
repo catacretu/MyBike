@@ -3,6 +3,7 @@ package com.example.mybike.views
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,7 +39,7 @@ import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("Range")
 @Composable
 fun EditBikeScreen(navController: NavController) {
     Scaffold(
@@ -60,7 +61,7 @@ fun EditBikeScreen(navController: NavController) {
                     }
                 }
             )
-        }) {
+        }) { paddingValues ->
         ConstraintLayout(
             modifier = Modifier
                 .background(GreyBlue)
@@ -94,6 +95,7 @@ fun EditBikeScreen(navController: NavController) {
                         .scale(1.2f)
                         .fillMaxWidth()
                         .constrainAs(backgroundWave) {
+                            centerVerticallyTo(parent,1.4f)
                             bottom.linkTo(parent.bottom)
                             start.linkTo(parent.start)
                         })
@@ -112,15 +114,18 @@ fun EditBikeScreen(navController: NavController) {
                     BikeType.MTBike,
                     BikeType.RoadBike)
 
-                LazyRow(modifier = Modifier
-                    .constrainAs(bike) {
-                        centerVerticallyTo(parent,0.5f)
-                        centerHorizontallyTo(parent, 0.45f)
-                    }
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(130.dp),
+                    contentPadding = paddingValues,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .constrainAs(bike) {
+                            centerVerticallyTo(parent,1f)
+                            centerHorizontallyTo(parent, 0.45f)
+                        }
                 ){
                     items(count = listOfBikes.size){index->
                         BikeBuilder(bikeType = listOfBikes[index],
-                            size = 275.dp,
+                            scaleSize = 1.8f,
                             bikeColor = selectedColor.value,
                             modifier = Modifier
                         )
@@ -130,10 +135,10 @@ fun EditBikeScreen(navController: NavController) {
                 Text(
                     text = "Road Bike",
                     color = White,
-                    fontSize = 15.sp,
+                    fontSize = 17.sp,
                     modifier = Modifier
                         .constrainAs(bikeNameLabel) {
-                            bottom.linkTo(parent.bottom, 32.dp)
+                            bottom.linkTo(parent.bottom)
                             centerHorizontallyTo(parent, 0.5f)
                         })
             }

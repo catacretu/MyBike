@@ -54,9 +54,26 @@ fun MyBikeTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
+//not work properly
+//    val systemUiController = rememberSystemUiController()
+//    val useDarkIcons = !isSystemInDarkTheme()
+//
+//    DisposableEffect(systemUiController, useDarkIcons) {
+//        // Update all of the system bar colors to be transparent, and use
+//        // dark icons if we're in light theme
+//        systemUiController.setStatusBarColor(
+//            color = Color.Transparent,
+//            darkIcons = useDarkIcons
+//        )
+//
+//        // setStatusBarColor() and setNavigationBarColor() also exist
+//
+//        onDispose {}
+//    }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
-
         SideEffect {
             val window = (view.context as Activity).window
             val windowInsetsController = WindowCompat.getInsetsController(window, view)

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -46,18 +47,21 @@ fun RideScreen(navController: NavController,
         },
         bottomBar = {
             BottomBar(navController = navController)
-        }) {
+        }) {paddingValues ->
         if(rideViewModel.rideData.isEmpty())
             EmptyRideScreen(navController = navController, ridesList = rideViewModel.rideData)
         else
-            RideScreenContent(navController = navController, rideViewModel = rideViewModel)
+            RideScreenContent(navController = navController,
+                rideViewModel = rideViewModel,
+                paddingValues)
     }
 }
 
 @Composable
-fun RideScreenContent(navController: NavController
-                      ,rideViewModel: RideViewModel) {
-    var ridesList = rideViewModel.rideData
+fun RideScreenContent(navController: NavController,
+                      rideViewModel: RideViewModel,
+                      paddingValues: PaddingValues) {
+    val ridesList = rideViewModel.rideData
     Column(
         modifier = Modifier
             .background(Black)
@@ -87,6 +91,7 @@ fun RideScreenContent(navController: NavController
 //        }
 
         LazyColumn(
+            contentPadding = paddingValues,
             modifier = Modifier
                 .fillMaxSize()
         ) {

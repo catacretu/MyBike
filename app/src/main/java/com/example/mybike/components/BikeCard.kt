@@ -22,7 +22,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,14 +33,14 @@ import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun BikeCard(editClick: () -> Unit,
+fun BikeCard(
+             editClick: () -> Unit,
              deleteClick: () -> Unit) {
 
     ConstraintLayout(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
-//        .height(310.dp)
-            .heightIn(min = 310.dp)
+            .heightIn(min = 360.dp)
             .background(DarkBlue)
     ) {
         val (backgroundWave,
@@ -83,11 +82,11 @@ fun BikeCard(editClick: () -> Unit,
             editClick = editClick, deleteClick = deleteClick)
 
         BikeBuilder(bikeType = BikeType.MTBike,
-            size = 275.dp,
+            scaleSize = 2f,
             bikeColor = BikeRed,
             modifier = Modifier
                 .constrainAs(bike) {
-                    centerVerticallyTo(parent, 0.2f)
+                    centerVerticallyTo(parent, 0.5f)
                     centerHorizontallyTo(parent, 0.45f)
 
                 })
@@ -96,7 +95,7 @@ fun BikeCard(editClick: () -> Unit,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.constrainAs(bikeName) {
-                top.linkTo(bike.bottom, (-5).dp)
+                top.linkTo(bike.bottom, (-20).dp)
                 start.linkTo(parent.start, 15.dp)
             }
         )

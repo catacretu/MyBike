@@ -16,6 +16,7 @@ import com.example.mybike.components.BottomBar
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.components.Title
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.White
 
@@ -25,7 +26,8 @@ fun SettingsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings", color = White) },
+                title = { Title("Settings")
+                        },
                 backgroundColor = GreyBlue
             )
         },

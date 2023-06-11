@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mybike.viewmodel.RideViewModel
 import com.example.mybike.views.AddBikeScreen
 import com.example.mybike.views.AddRideScreen
+import com.example.mybike.views.BikeDetailsScreen
 import com.example.mybike.views.BikeScreen
 import com.example.mybike.views.EditBikeScreen
 import com.example.mybike.views.EditRideScreen
@@ -38,6 +39,10 @@ fun NavigationGraph(rideViewModel: RideViewModel) {
         }
         composable("edit_bike_screen") {
             EditBikeScreen(navController = navController)
+        }
+
+        composable("bike_details_screen") {
+           BikeDetailsScreen(navController = navController, rideViewModel)
         }
 
         composable("ride_screen") {
