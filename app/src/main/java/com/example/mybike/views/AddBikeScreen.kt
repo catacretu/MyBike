@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +36,7 @@ import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
+import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
@@ -64,7 +66,7 @@ fun AddBikeScreen(navController: NavController) {
         }) { paddingValues ->
         ConstraintLayout(
             modifier = Modifier
-                .background(GreyBlue)
+                .background(DarkBlue)
                 .fillMaxSize(),
         )
         {
@@ -91,6 +93,7 @@ fun AddBikeScreen(navController: NavController) {
 
                 Image(painter = painterResource(id = R.drawable.wave),
                     contentDescription = "wave",
+                    colorFilter = ColorFilter.tint(DarkBlue),
                     modifier = Modifier
                         .scale(1.2f)
                         .fillMaxWidth()

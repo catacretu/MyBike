@@ -17,6 +17,7 @@ import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
 import com.example.mybike.components.Title
+import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.White
 
@@ -28,7 +29,7 @@ fun SettingsScreen(navController: NavController) {
             TopAppBar(
                 title = { Title("Settings")
                         },
-                backgroundColor = GreyBlue
+                backgroundColor = DarkBlue
             )
         },
         bottomBar = {
@@ -37,7 +38,7 @@ fun SettingsScreen(navController: NavController) {
 
         ConstraintLayout(
             modifier = Modifier
-                .background(GreyBlue)
+                .background(DarkBlue)
                 .fillMaxSize(),
         )
         {

@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.mybike.R
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
@@ -34,7 +35,7 @@ fun EditRideScreen(navController: NavController) {
         topBar = {
             TopAppBar(
                 title = { Text("Edit Ride", color = White) },
-                backgroundColor = GreyBlue,
+                backgroundColor = DarkBlue,
                 actions = {
                     IconButton(onClick = {navController.navigate("ride_screen"){
                         popUpTo("edit_ride_screen")
@@ -52,7 +53,7 @@ fun EditRideScreen(navController: NavController) {
         }) {
         ConstraintLayout(
             modifier = Modifier
-                .background(GreyBlue)
+                .background(DarkBlue)
                 .fillMaxSize(),
         )
         {
