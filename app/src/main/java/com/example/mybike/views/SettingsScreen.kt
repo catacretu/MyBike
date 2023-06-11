@@ -14,11 +14,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import com.example.mybike.components.BottomBar
-import com.example.mybike.components.DropDownField
-import com.example.mybike.components.SwitchButton
-import com.example.mybike.components.TextFieldWithRequiredIcon
-import com.example.mybike.components.Title
+import com.example.mybike.components.bottombar.BottomBar
+import com.example.mybike.components.dropdown.DropDownField
+import com.example.mybike.components.buttons.SwitchButton
+import com.example.mybike.components.textcomponents.TextFieldWithRequiredIcon
+import com.example.mybike.components.textcomponents.Title
 import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.viewmodel.BikeViewModel
 

@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.bikecomponents
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,10 +26,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.core.graphics.toColorInt
 import com.example.mybike.R
+import com.example.mybike.components.MoreMenu
 import com.example.mybike.data.local.model.BikeEntity
-import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyProgressBar
 import com.example.mybike.ui.theme.LightBlue

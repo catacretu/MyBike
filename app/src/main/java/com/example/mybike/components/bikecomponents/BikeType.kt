@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.bikecomponents
 
 import com.example.mybike.R
 
@@ -41,4 +41,5 @@ sealed class BikeType(
 val listBikeTypes = mapOf("Electric Bike" to BikeType.ElectricBike,
     "Hybrid Bike" to BikeType.HybridBike,
     "MTB Bike" to BikeType.MTBike,
-    "Road Bike" to BikeType.RoadBike)
+    "Road Bike" to BikeType.RoadBike
+)

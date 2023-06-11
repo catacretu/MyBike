@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.textcomponents
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

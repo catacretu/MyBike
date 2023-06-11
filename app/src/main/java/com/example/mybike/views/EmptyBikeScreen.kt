@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.R
-import com.example.mybike.components.BottomBar
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White

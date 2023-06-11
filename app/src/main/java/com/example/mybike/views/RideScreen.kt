@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mybike.components.AddButtonWithText
-import com.example.mybike.components.BottomBar
+import com.example.mybike.components.buttons.AddButtonWithText
+import com.example.mybike.components.bottombar.BottomBar
 import com.example.mybike.components.RideCard
-import com.example.mybike.components.Title
+import com.example.mybike.components.textcomponents.Title
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.MonthGrey
@@ -41,7 +41,8 @@ fun RideScreen(navController: NavController,
                         AddButtonWithText(text = "Add Ride")
                         {navController.navigate("add_ride_screen"){
                             popUpTo("ride_screen")
-                        }}}
+                        }}
+                }
             )
         },
         bottomBar = {

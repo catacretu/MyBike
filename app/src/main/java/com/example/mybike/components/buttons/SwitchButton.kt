@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.buttons
 
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults

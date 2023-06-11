@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -21,8 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.R
-import com.example.mybike.components.BottomBar
-import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White

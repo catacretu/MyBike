@@ -12,10 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.mybike.components.AddButtonWithText
-import com.example.mybike.components.BikeCard
-import com.example.mybike.components.BottomBar
-import com.example.mybike.components.Title
+import com.example.mybike.components.buttons.AddButtonWithText
+import com.example.mybike.components.bikecomponents.BikeCard
+import com.example.mybike.components.bottombar.BottomBar
+import com.example.mybike.components.textcomponents.Title
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.viewmodel.BikeViewModel
 
@@ -29,7 +29,8 @@ fun BikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                     if(bikeViewModel.bikeData.isNotEmpty())
                         Title(text = "Bikes")
                     else
-                        Title(text = "Bikes", modifier = Modifier.padding(top = 34.dp))},
+                        Title(text = "Bikes", modifier = Modifier.padding(top = 34.dp))
+                },
                 backgroundColor = Black,
                 actions = {
                   if(bikeViewModel.bikeData.isNotEmpty())

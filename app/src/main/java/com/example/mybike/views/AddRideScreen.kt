@@ -23,11 +23,10 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.R
-import com.example.mybike.components.DropDownField
-import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.components.dropdown.DropDownField
+import com.example.mybike.components.textcomponents.TextFieldWithRequiredIcon
 import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.DarkBlue
-import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 import com.example.mybike.viewmodel.BikeViewModel

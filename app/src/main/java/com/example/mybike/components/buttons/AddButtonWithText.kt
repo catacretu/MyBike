@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.buttons
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon

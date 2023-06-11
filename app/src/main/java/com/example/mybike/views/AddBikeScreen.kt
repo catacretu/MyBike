@@ -15,13 +15,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
@@ -33,18 +30,16 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.mybike.R
-import com.example.mybike.components.BikeBuilder
-import com.example.mybike.components.BikeType
-import com.example.mybike.components.ColorsList
-import com.example.mybike.components.DropDownField
-import com.example.mybike.components.SwitchButton
-import com.example.mybike.components.TextFieldWithRequiredIcon
-import com.example.mybike.components.listBikeTypes
+import com.example.mybike.components.bikecomponents.BikeBuilder
+import com.example.mybike.components.bikecomponents.ColorsList
+import com.example.mybike.components.dropdown.DropDownField
+import com.example.mybike.components.buttons.SwitchButton
+import com.example.mybike.components.textcomponents.TextFieldWithRequiredIcon
+import com.example.mybike.components.bikecomponents.listBikeTypes
 import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.DarkBlue
-import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 import com.example.mybike.viewmodel.BikeViewModel
@@ -135,7 +130,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                             centerHorizontallyTo(parent, 0.45f)
                         }
                     ){
-                    items(count = listBikeTypes.size){index->
+                    items(count = listBikeTypes.size){ index->
                         BikeBuilder(bikeType = listBikeTypes.values.elementAt(index),
                             scaleSize = 1.8f,
                             bikeColor = selectedColor.value,

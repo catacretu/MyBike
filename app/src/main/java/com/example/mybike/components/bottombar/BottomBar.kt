@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.bottombar
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

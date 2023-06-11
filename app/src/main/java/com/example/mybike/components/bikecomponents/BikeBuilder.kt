@@ -1,4 +1,4 @@
-package com.example.mybike.components
+package com.example.mybike.components.bikecomponents
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
