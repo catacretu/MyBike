@@ -89,7 +89,7 @@ fun RideCard(rideEntity: RideEntity,
                 start.linkTo(parent.start, 20.dp)
             })
         TextWithValue(label = "Distance: ",
-            value = rideEntity.distance,
+            value = rideEntity.distance.toString(),
             modifier = Modifier.constrainAs(distanceField) {
                 top.linkTo(bikeNameField.bottom)
                 start.linkTo(parent.start, 20.dp)

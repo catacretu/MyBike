@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -70,6 +71,9 @@ fun EditBikeScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue("")) }
+            val wheelSizeValue = remember { mutableStateOf(TextFieldValue("29")) }
+            val serviceInValue = remember { mutableStateOf(TextFieldValue("")) }
             val selectedColor = remember { mutableStateOf(BikeRed) }
             val (bikeBox,
                 colorsList,
@@ -130,6 +134,7 @@ fun EditBikeScreen(navController: NavController) {
                         BikeBuilder(bikeType = listOfBikes[index],
                             scaleSize = 1.8f,
                             bikeColor = selectedColor.value,
+                            onClick = {},
                             modifier = Modifier
                         )
                     }
@@ -148,7 +153,7 @@ fun EditBikeScreen(navController: NavController) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Bike Name",
-                fieldValue = "",
+                fieldValue = bikeNameValue,
                 modifierLayout = Modifier
 
                     .constrainAs(bikeNameField) {
@@ -160,6 +165,7 @@ fun EditBikeScreen(navController: NavController) {
             )
             DropDownField(fieldName = "Wheel Size",
                 listOfItems = arrayOf("29", "32"),
+                selectedItem = wheelSizeValue,
                 modifier = Modifier
                     .constrainAs(wheelSizeField) {
                         top.linkTo(bikeNameField.bottom)
@@ -168,7 +174,7 @@ fun EditBikeScreen(navController: NavController) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Service In",
-                fieldValue = "1000",
+                fieldValue = serviceInValue,
                 measureUnit = "KM",
                 modifierLayout = Modifier
 

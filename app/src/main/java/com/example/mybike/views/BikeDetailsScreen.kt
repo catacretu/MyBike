@@ -38,6 +38,7 @@ import com.example.mybike.components.BikeBuilder
 import com.example.mybike.components.BikeType
 import com.example.mybike.components.RideCard
 import com.example.mybike.components.TextWithValue
+import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.DarkBlue
@@ -46,6 +47,7 @@ import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.GreyProgressBar
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.BikeViewModel
 import com.example.mybike.viewmodel.RideViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -116,6 +118,7 @@ fun BikeDetailsScreen(navController: NavController,
                 BikeBuilder(bikeType = BikeType.MTBike,
                     scaleSize = 2f,
                     bikeColor = BikeRed,
+                    onClick = {},
                     modifier = Modifier
                         .constrainAs(bike) {
                             centerVerticallyTo(parent, 0.5f)

@@ -37,3 +37,8 @@ sealed class BikeType(
         R.drawable.bike_roadbike_big_wheels
     )
 }
+
+val listBikeTypes = mapOf("Electric Bike" to BikeType.ElectricBike,
+    "Hybrid Bike" to BikeType.HybridBike,
+    "MTB Bike" to BikeType.MTBike,
+    "Road Bike" to BikeType.RoadBike)

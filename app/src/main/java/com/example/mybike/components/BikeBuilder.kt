@@ -1,6 +1,7 @@
 package com.example.mybike.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -17,11 +18,13 @@ fun BikeBuilder(
     bikeType: BikeType,
     scaleSize: Float,
     bikeColor: Color,
+    onClick: () -> Unit,
     modifier: Modifier
 ) {
 
     Box(
         modifier = modifier
+            .clickable(onClick = onClick)
             .wrapContentWidth()
             .height(160.dp)
     ) {

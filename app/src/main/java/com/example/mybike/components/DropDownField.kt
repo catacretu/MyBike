@@ -9,9 +9,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -22,6 +24,7 @@ import com.example.mybike.ui.theme.White
 fun DropDownField(
     fieldName: String,
     listOfItems: Array<String>,
+    selectedItem: MutableState<TextFieldValue>,
     modifier: Modifier
 ) {
     ConstraintLayout(
@@ -54,6 +57,7 @@ fun DropDownField(
                 })
         DropDownList(
             listOfItems = listOfItems,
+            selectedItem = selectedItem,
             modifierTextField = Modifier
                 .fillMaxWidth()
                 .height(50.dp)

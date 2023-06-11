@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     val bikeId: Int = 0,
     val bikeName: String,
     val bikeType: String,
-    val bikeColor: String,
+    val bikeColor: Int,
     val wheelSize: String,
     val serviceIn: String
         )

@@ -27,8 +27,15 @@ class RideViewModel @Inject constructor(
 //        }
 //    }
 
+    fun saveRide(rideEntity: RideEntity){
+        repository.saveRide(rideEntity)
+    }
     private fun fetchRideData(): List<RideEntity> {
         return repository.getRides()
+    }
+
+    fun updateRide(rideEntity: RideEntity){
+        repository.updateRide(rideEntity)
     }
     fun deleteRide(rideEntity: RideEntity) {
         repository.deleteRide(rideEntity)

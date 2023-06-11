@@ -43,7 +43,7 @@ fun NavigationGraph(rideViewModel: RideViewModel, bikeViewModel: BikeViewModel) 
         }
 
         composable("bike_details_screen") {
-           BikeDetailsScreen(navController = navController, rideViewModel)
+           BikeDetailsScreen(navController = navController,rideViewModel)
         }
 
         composable("ride_screen") {
@@ -51,13 +51,13 @@ fun NavigationGraph(rideViewModel: RideViewModel, bikeViewModel: BikeViewModel) 
         }
 
         composable("add_ride_screen") {
-            AddRideScreen(navController = navController, rideViewModel)
+            AddRideScreen(navController = navController, bikeViewModel, rideViewModel)
         }
         composable("edit_ride_screen") {
-            EditRideScreen(navController = navController)
+            EditRideScreen(navController = navController, bikeViewModel, rideViewModel)
         }
         composable("settings_screen") {
-            SettingsScreen(navController = navController)
+            SettingsScreen(navController = navController, bikeViewModel)
         }
     }
 }

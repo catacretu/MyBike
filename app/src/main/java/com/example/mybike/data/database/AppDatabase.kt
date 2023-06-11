@@ -11,8 +11,8 @@ import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.data.local.model.ListTypeConverter
 import com.example.mybike.data.local.model.RideEntity
 
-@Database(entities = [BikeEntity::class,RideEntity::class], version = 2)
-@TypeConverters(ListTypeConverter::class)
+@Database(entities = [BikeEntity::class,RideEntity::class], version = 10)
+//@TypeConverters(ListTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getRideDAO(): RideDAO

@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -38,10 +39,6 @@ import com.example.mybike.ui.theme.White
 fun BikeCard(bikeEntity: BikeEntity,
              editClick: () -> Unit,
              deleteClick: () -> Unit) {
-    val listBikeTypes = mapOf("electric" to BikeType.ElectricBike,
-                              "hybrid" to BikeType.HybridBike,
-                              "mtb" to BikeType.MTBike,
-                              "road" to BikeType.RoadBike)
 
     ConstraintLayout(
         modifier = Modifier
@@ -90,7 +87,8 @@ fun BikeCard(bikeEntity: BikeEntity,
         listBikeTypes[bikeEntity.bikeType]?.let {
             BikeBuilder(bikeType = it,
                 scaleSize = 2f,
-                bikeColor = BikeRed,
+                bikeColor = Color(bikeEntity.bikeColor),
+                onClick = {},
                 modifier = Modifier
                     .constrainAs(bike) {
                         centerVerticallyTo(parent, 0.5f)
@@ -98,7 +96,7 @@ fun BikeCard(bikeEntity: BikeEntity,
 
                     })
         }
-        Text(text = "Nukeproof Scout 290",
+        Text(text = bikeEntity.bikeName,
             color = White,
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
@@ -112,7 +110,7 @@ fun BikeCard(bikeEntity: BikeEntity,
             buildAnnotatedString {
                 append("Wheels: ")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
-                    append("29\"")
+                    append(bikeEntity.wheelSize + "\"")
                 }
             },
             color = White,
@@ -123,9 +121,9 @@ fun BikeCard(bikeEntity: BikeEntity,
             }
         )
         Text(buildAnnotatedString {
-            append("Service in: ")
+            append("Service in ")
             withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
-                append("170km")
+                append(bikeEntity.serviceIn + "km")
             }
         },
             color = White,
@@ -136,7 +134,7 @@ fun BikeCard(bikeEntity: BikeEntity,
             }
         )
         LinearProgressIndicator(
-            progress = 0.6f,
+            progress = 100f/bikeEntity.serviceIn.toFloat(),
             color = LightBlue,
             modifier = Modifier
                 .fillMaxWidth()

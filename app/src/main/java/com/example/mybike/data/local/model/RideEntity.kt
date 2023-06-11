@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "ride_table")
 class RideEntity(
     @PrimaryKey(autoGenerate = true)
-    val rideId: Int,
+    val rideId: Int =0,
     val rideTitle: String,
     val bikeName: String,
     val distance: String,

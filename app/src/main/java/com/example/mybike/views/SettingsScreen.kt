@@ -5,10 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
@@ -18,12 +20,12 @@ import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
 import com.example.mybike.components.Title
 import com.example.mybike.ui.theme.DarkBlue
-import com.example.mybike.ui.theme.GreyBlue
-import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.BikeViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(navController: NavController,
+                   bikeViewModel: BikeViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,6 +44,11 @@ fun SettingsScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
+            val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
+            val distanceUnitValue = remember { mutableStateOf(TextFieldValue("KM")) }
+            val rideNameValue = remember { mutableStateOf(TextFieldValue("100km")) }
+            val defulatBikeValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }
+
             val (distanceUnitField,
                 serviceReminderTextField,
                 switchButton,
@@ -49,6 +56,7 @@ fun SettingsScreen(navController: NavController) {
 
             DropDownField(fieldName = "Distance Units",
                 listOfItems = arrayOf("KM", "Mi"),
+                selectedItem = distanceUnitValue,
                 modifier = Modifier
                     .constrainAs(distanceUnitField) {
                         top.linkTo(parent.top, 10.dp)
@@ -57,7 +65,7 @@ fun SettingsScreen(navController: NavController) {
             )
             TextFieldWithRequiredIcon(
                 fieldName = "Service Reminder",
-                fieldValue = "100km",
+                fieldValue = rideNameValue,
                 withIcon = false,
                 modifierLayout = Modifier
                     .constrainAs(serviceReminderTextField) {
@@ -74,7 +82,8 @@ fun SettingsScreen(navController: NavController) {
                 })
 
             DropDownField(fieldName = "Default Bike",
-                listOfItems = arrayOf("KM", "Mi"),
+                listOfItems = listOfBikes,
+                selectedItem = defulatBikeValue,
                 modifier = Modifier
                     .constrainAs(defaultBike) {
                         top.linkTo(switchButton.bottom, 10.dp)

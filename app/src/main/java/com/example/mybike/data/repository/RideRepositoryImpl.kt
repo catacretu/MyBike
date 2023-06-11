@@ -8,7 +8,7 @@ class RideRepositoryImpl @Inject constructor(
     private val rideDAO: RideDAO
 ) : RideRepository {
     override fun saveRide(rideEntity: RideEntity) {
-        TODO("Not yet implemented")
+        rideDAO.saveRide(rideEntity)
     }
 
     override fun getRides(): List<RideEntity> {
@@ -16,7 +16,7 @@ class RideRepositoryImpl @Inject constructor(
     }
 
     override fun updateRide(rideEntity: RideEntity) {
-        TODO("Not yet implemented")
+        rideDAO.updateRide(rideEntity)
     }
 
     override fun deleteRide(rideEntity: RideEntity) {

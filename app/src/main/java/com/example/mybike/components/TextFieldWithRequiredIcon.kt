@@ -13,10 +13,12 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -29,7 +31,7 @@ import com.example.mybike.ui.theme.White
 @Composable
 fun TextFieldWithRequiredIcon(
     fieldName: String,
-    fieldValue: String,
+    fieldValue: MutableState<TextFieldValue>,
     withIcon: Boolean = true,
     measureUnit: String = "",
     modifierLayout: Modifier,
@@ -76,8 +78,8 @@ fun TextFieldWithRequiredIcon(
             LocalTextSelectionColors provides customTextSelectionColors
         ) {
             TextField(
-                value = fieldValue,
-                onValueChange = {},
+                value = fieldValue.value,
+                onValueChange = {fieldValue.value = it},
                 textStyle = TextStyle.Default.copy(fontSize = 14.sp),
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = GreyBlue,

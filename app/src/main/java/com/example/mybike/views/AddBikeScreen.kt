@@ -15,14 +15,19 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,6 +39,7 @@ import com.example.mybike.components.ColorsList
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.components.listBikeTypes
 import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
@@ -72,12 +78,12 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                 .fillMaxSize(),
         )
         {
-            val listOfBikes = listOf(
-                BikeType.ElectricBike,
-                BikeType.HybridBike,
-                BikeType.MTBike,
-                BikeType.RoadBike)
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue("")) }
+            val wheelSizeValue = remember { mutableStateOf(TextFieldValue("29")) }
+            val serviceInValue = remember { mutableStateOf(TextFieldValue("")) }
             val selectedColor = remember { mutableStateOf(BikeRed) }
+            val selectedBike = remember { mutableStateOf("electric") }
+
             val (bikeBox,
                 colorsList,
                 bike,
@@ -105,7 +111,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                         .scale(1.2f)
                         .fillMaxWidth()
                         .constrainAs(backgroundWave) {
-                            centerVerticallyTo(parent,1.4f)
+                            centerVerticallyTo(parent, 1.4f)
                             bottom.linkTo(parent.bottom)
                             start.linkTo(parent.start)
                         })
@@ -124,21 +130,24 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .constrainAs(bike) {
-                        centerVerticallyTo(parent,1f)
-                        centerHorizontallyTo(parent, 0.45f)
+                            centerVerticallyTo(parent, 1f)
+                            centerHorizontallyTo(parent, 0.45f)
                         }
                     ){
-                    items(count = listOfBikes.size){index->
-                        BikeBuilder(bikeType = listOfBikes[index],
+                    items(count = listBikeTypes.size){index->
+                        BikeBuilder(bikeType = listBikeTypes.values.elementAt(index),
                             scaleSize = 1.8f,
                             bikeColor = selectedColor.value,
+                            onClick = {
+                                      selectedBike.value = listBikeTypes.keys.elementAt(index)
+                            },
                             modifier = Modifier
                                 )
                     }
                 }
 
                 Text(
-                    text = "Road Bike",
+                    text = selectedBike.value,
                     color = White,
                     fontSize = 17.sp,
                     modifier = Modifier
@@ -150,7 +159,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Bike Name",
-                fieldValue = "",
+                fieldValue = bikeNameValue,
                 modifierLayout = Modifier
 
                     .constrainAs(bikeNameField) {
@@ -162,6 +171,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
             )
             DropDownField(fieldName = "Wheel Size",
                 listOfItems = arrayOf("29", "32"),
+                selectedItem = wheelSizeValue,
                 modifier = Modifier
                     .constrainAs(wheelSizeField) {
                         top.linkTo(bikeNameField.bottom)
@@ -170,7 +180,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Service In",
-                fieldValue = "1000",
+                fieldValue = serviceInValue,
                 measureUnit = "KM",
                 modifierLayout = Modifier
 
@@ -196,11 +206,11 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                 onClick = {
                     bikeViewModel.saveBike(
                         BikeEntity(
-                            bikeName = "NukeBike",
-                            bikeType = "mtb",
-                            bikeColor = "BikeRed",
-                            wheelSize = "29",
-                            serviceIn = "500km"
+                            bikeName = bikeNameValue.value.text,
+                            bikeType = selectedBike.value,
+                            bikeColor = selectedColor.value.toArgb(),
+                            wheelSize = wheelSizeValue.value.text,
+                            serviceIn = serviceInValue.value.text
                         )
                     )
                     navController.navigate("bike_screen") {

@@ -13,8 +13,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -26,10 +29,15 @@ import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.BikeViewModel
+import com.example.mybike.viewmodel.RideViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun EditRideScreen(navController: NavController) {
+fun EditRideScreen(navController: NavController,
+                   bikeViewModel: BikeViewModel,
+                   rideViewModel: RideViewModel
+                   ) {
 
     Scaffold(
         topBar = {
@@ -57,6 +65,13 @@ fun EditRideScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
+            val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
+            val rideNameValue = remember { mutableStateOf(TextFieldValue("")) }
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }
+            val distanceValue = remember { mutableStateOf(TextFieldValue("60")) }
+            val durationValue = remember { mutableStateOf(TextFieldValue("2h, 14 min")) }
+            val dateValue = remember { mutableStateOf(TextFieldValue("29.03.2023")) }
+
             val (rideTitleField,
                 bikeField,
                 distanceField,
@@ -65,7 +80,7 @@ fun EditRideScreen(navController: NavController) {
                 addRideButton) = createRefs()
             TextFieldWithRequiredIcon(
                 fieldName = "Ride Title",
-                fieldValue = "Faget MTB Tour",
+                fieldValue = rideNameValue,
                 withIcon = false,
                 modifierLayout = Modifier
 
@@ -77,7 +92,8 @@ fun EditRideScreen(navController: NavController) {
             )
 
             DropDownField(fieldName = "Bike",
-                listOfItems = arrayOf("Nukeproof Scout 290"),
+                listOfItems = listOfBikes,
+                selectedItem = bikeNameValue,
                 modifier = Modifier
                     .constrainAs(bikeField) {
                         top.linkTo(rideTitleField.bottom)
@@ -86,7 +102,7 @@ fun EditRideScreen(navController: NavController) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Distance",
-                fieldValue = "60",
+                fieldValue = distanceValue,
                 measureUnit = "KM",
                 modifierLayout = Modifier
                     .constrainAs(distanceField) {
@@ -98,7 +114,7 @@ fun EditRideScreen(navController: NavController) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Duration",
-                fieldValue = "2h, 14min",
+                fieldValue = durationValue,
                 modifierLayout = Modifier
                     .constrainAs(durationField) {
                         top.linkTo(distanceField.bottom)
@@ -109,7 +125,7 @@ fun EditRideScreen(navController: NavController) {
 
             TextFieldWithRequiredIcon(
                 fieldName = "Date",
-                fieldValue = "29.03.2023",
+                fieldValue = dateValue,
                 modifierLayout = Modifier
                     .constrainAs(dateField) {
                         top.linkTo(durationField.bottom)
