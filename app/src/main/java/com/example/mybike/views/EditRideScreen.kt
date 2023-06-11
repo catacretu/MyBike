@@ -25,8 +25,8 @@ import androidx.navigation.NavController
 import com.example.mybike.R
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.DarkBlue
-import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 import com.example.mybike.viewmodel.BikeViewModel
@@ -35,6 +35,7 @@ import com.example.mybike.viewmodel.RideViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun EditRideScreen(navController: NavController,
+                   rideId: String,
                    bikeViewModel: BikeViewModel,
                    rideViewModel: RideViewModel
                    ) {
@@ -65,12 +66,13 @@ fun EditRideScreen(navController: NavController,
                 .fillMaxSize(),
         )
         {
+            val rideEntity = rideViewModel.getRideById(rideId.toInt())
             val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
-            val rideNameValue = remember { mutableStateOf(TextFieldValue("")) }
-            val bikeNameValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }
-            val distanceValue = remember { mutableStateOf(TextFieldValue("60")) }
-            val durationValue = remember { mutableStateOf(TextFieldValue("2h, 14 min")) }
-            val dateValue = remember { mutableStateOf(TextFieldValue("29.03.2023")) }
+            val rideTitleValue = remember { mutableStateOf(TextFieldValue(rideEntity.rideTitle)) }
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue(rideEntity.bikeName)) }
+            val distanceValue = remember { mutableStateOf(TextFieldValue(rideEntity.distance)) }
+            val durationValue = remember { mutableStateOf(TextFieldValue(rideEntity.duration)) }
+            val dateValue = remember { mutableStateOf(TextFieldValue(rideEntity.date)) }
 
             val (rideTitleField,
                 bikeField,
@@ -80,7 +82,7 @@ fun EditRideScreen(navController: NavController,
                 addRideButton) = createRefs()
             TextFieldWithRequiredIcon(
                 fieldName = "Ride Title",
-                fieldValue = rideNameValue,
+                fieldValue = rideTitleValue,
                 withIcon = false,
                 modifierLayout = Modifier
 
@@ -136,6 +138,16 @@ fun EditRideScreen(navController: NavController,
 
             Button(
                 onClick = {
+                    rideViewModel.updateRide(
+                        RideEntity(
+                            rideId = rideId.toInt(),
+                            rideTitle = rideTitleValue.value.text,
+                            bikeName = bikeNameValue.value.text,
+                            distance = distanceValue.value.text,
+                            duration = durationValue.value.text,
+                            date = dateValue.value.text
+                        )
+                    )
                     navController.navigate("ride_screen") {
                         popUpTo("add_ride_screen")
                     }

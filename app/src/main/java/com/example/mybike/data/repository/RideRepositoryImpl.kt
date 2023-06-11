@@ -15,6 +15,10 @@ class RideRepositoryImpl @Inject constructor(
         return rideDAO.getAllRides()
     }
 
+    override fun getRideById(rideId: Int): RideEntity {
+        return rideDAO.getRideById(rideId)
+    }
+
     override fun updateRide(rideEntity: RideEntity) {
         rideDAO.updateRide(rideEntity)
     }

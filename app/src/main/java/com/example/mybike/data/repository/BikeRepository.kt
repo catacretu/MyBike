@@ -8,6 +8,8 @@ interface BikeRepository {
 
     fun getBikes(): List<BikeEntity>
 
+    fun getBikeById(bikeId: Int): BikeEntity
+
     fun updateBike(bikeEntity: BikeEntity)
 
     fun deleteBike(bikeEntity: BikeEntity)

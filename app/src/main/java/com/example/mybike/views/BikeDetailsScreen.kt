@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
@@ -32,12 +33,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavHost
+import androidx.navigation.compose.NavHost
 import com.example.mybike.R
 import com.example.mybike.components.BackButtonWithText
 import com.example.mybike.components.BikeBuilder
 import com.example.mybike.components.BikeType
 import com.example.mybike.components.RideCard
 import com.example.mybike.components.TextWithValue
+import com.example.mybike.components.listBikeTypes
 import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
@@ -53,8 +57,11 @@ import com.example.mybike.viewmodel.RideViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun BikeDetailsScreen(navController: NavController,
+                      bikeId: String,
+                      bikeViewModel: BikeViewModel,
                       rideViewModel: RideViewModel) {
     val ridesList = rideViewModel.rideData
+    val bikeEntity = bikeViewModel.getBikeById(bikeId.toInt())
     Scaffold(
         topBar = {
             TopAppBar(
@@ -115,22 +122,24 @@ fun BikeDetailsScreen(navController: NavController,
                         })
 
 
-                BikeBuilder(bikeType = BikeType.MTBike,
-                    scaleSize = 2f,
-                    bikeColor = BikeRed,
-                    onClick = {},
-                    modifier = Modifier
-                        .constrainAs(bike) {
-                            centerVerticallyTo(parent, 0.5f)
-                            centerHorizontallyTo(parent, 0.45f)
+                listBikeTypes[bikeEntity.bikeType]?.let {
+                    BikeBuilder(bikeType = it,
+                        scaleSize = 2f,
+                        bikeColor = Color(bikeEntity.bikeColor),
+                        onClick = {},
+                        modifier = Modifier
+                            .constrainAs(bike) {
+                                centerVerticallyTo(parent, 0.5f)
+                                centerHorizontallyTo(parent, 0.45f)
 
-                        })
+                            })
+                }
 
                 Text(
                     buildAnnotatedString {
                         append("Wheels: ")
                         withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
-                            append("28\"")
+                            append(bikeEntity.wheelSize +"\"")
                         }
                     },
                     color = White,
@@ -144,7 +153,7 @@ fun BikeDetailsScreen(navController: NavController,
                     buildAnnotatedString {
                         append("Service in: ")
                         withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold)) {
-                            append("170km")
+                            append(bikeEntity.serviceIn + "km")
                         }
                     },
                     color = White,
@@ -155,7 +164,7 @@ fun BikeDetailsScreen(navController: NavController,
                     }
                 )
                 LinearProgressIndicator(
-                    progress = 0.6f,
+                    progress = 100f/bikeEntity.serviceIn.toFloat(),
                     color = LightBlue,
                     modifier = Modifier
                         .fillMaxWidth()

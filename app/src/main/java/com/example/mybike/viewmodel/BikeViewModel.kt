@@ -25,7 +25,11 @@ class BikeViewModel @Inject constructor(
         return repository.getBikes()
     }
 
-    fun updateBikeData(bikeEntity: BikeEntity) {
+    fun getBikeById(bikeId: Int): BikeEntity {
+        return repository.getBikeById(bikeId)
+    }
+
+    fun updateBike(bikeEntity: BikeEntity) {
         repository.updateBike(bikeEntity)
     }
 

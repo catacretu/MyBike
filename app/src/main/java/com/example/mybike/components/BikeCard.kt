@@ -38,10 +38,12 @@ import com.example.mybike.ui.theme.White
 @Composable
 fun BikeCard(bikeEntity: BikeEntity,
              editClick: () -> Unit,
-             deleteClick: () -> Unit) {
+             deleteClick: () -> Unit,
+             onClick: () -> Unit,
+             modifier: Modifier) {
 
     ConstraintLayout(
-        modifier = Modifier
+        modifier = modifier
             .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
             .heightIn(min = 360.dp)
             .background(DarkBlue)
@@ -88,7 +90,7 @@ fun BikeCard(bikeEntity: BikeEntity,
             BikeBuilder(bikeType = it,
                 scaleSize = 2f,
                 bikeColor = Color(bikeEntity.bikeColor),
-                onClick = {},
+                onClick = onClick,
                 modifier = Modifier
                     .constrainAs(bike) {
                         centerVerticallyTo(parent, 0.5f)

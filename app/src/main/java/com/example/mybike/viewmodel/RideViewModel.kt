@@ -33,6 +33,9 @@ class RideViewModel @Inject constructor(
     private fun fetchRideData(): List<RideEntity> {
         return repository.getRides()
     }
+    fun getRideById(rideId: Int): RideEntity{
+        return repository.getRideById(rideId)
+    }
 
     fun updateRide(rideEntity: RideEntity){
         repository.updateRide(rideEntity)

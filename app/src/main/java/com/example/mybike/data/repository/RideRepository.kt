@@ -7,6 +7,8 @@ interface RideRepository {
     fun saveRide(rideEntity: RideEntity)
     fun getRides(): List<RideEntity>
 
+    fun getRideById(rideId: Int): RideEntity
+
     fun updateRide(rideEntity: RideEntity)
     fun deleteRide(rideEntity: RideEntity)
 }

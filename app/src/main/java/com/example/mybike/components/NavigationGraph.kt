@@ -1,9 +1,11 @@
 package com.example.mybike.components
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.mybike.viewmodel.BikeViewModel
 import com.example.mybike.viewmodel.RideViewModel
 import com.example.mybike.views.AddBikeScreen
@@ -38,12 +40,23 @@ fun NavigationGraph(rideViewModel: RideViewModel, bikeViewModel: BikeViewModel) 
         composable("add_bike_screen") {
             AddBikeScreen(navController = navController, bikeViewModel)
         }
-        composable("edit_bike_screen") {
-            EditBikeScreen(navController = navController)
+        composable("edit_bike_screen/{bikeId}",
+            arguments = listOf(navArgument("bikeId"){type = NavType.StringType}))
+        {backStackEntry->
+            backStackEntry.arguments?.getString("bikeId")?.let{bikeId->
+                EditBikeScreen(navController = navController, bikeId, bikeViewModel)
+            }
         }
 
-        composable("bike_details_screen") {
-           BikeDetailsScreen(navController = navController,rideViewModel)
+        composable("bike_details_screen/{bikeId}",
+            arguments = listOf(navArgument("bikeId"){type = NavType.StringType}))
+        {backStackEntry ->
+            backStackEntry.arguments?.getString("bikeId")?.let {bikeId->
+                BikeDetailsScreen(navController = navController,
+                    bikeId,
+                    bikeViewModel,
+                    rideViewModel)
+            }
         }
 
         composable("ride_screen") {
@@ -53,8 +66,15 @@ fun NavigationGraph(rideViewModel: RideViewModel, bikeViewModel: BikeViewModel) 
         composable("add_ride_screen") {
             AddRideScreen(navController = navController, bikeViewModel, rideViewModel)
         }
-        composable("edit_ride_screen") {
-            EditRideScreen(navController = navController, bikeViewModel, rideViewModel)
+        composable("edit_ride_screen/{rideId}",
+            arguments = listOf(navArgument("rideId"){type = NavType.StringType}))
+        {backStackEntry ->
+            backStackEntry.arguments?.getString("rideId")?.let {rideId->
+                EditRideScreen(navController = navController,
+                    rideId,
+                    bikeViewModel,
+                    rideViewModel)
+            }
         }
         composable("settings_screen") {
             SettingsScreen(navController = navController, bikeViewModel)

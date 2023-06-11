@@ -21,7 +21,7 @@ import com.example.mybike.viewmodel.BikeViewModel
 
 @Composable
 fun BikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
-    val bikesList = bikeViewModel.bikeData
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -49,7 +49,7 @@ fun BikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
             EmptyBikeScreen(navController = navController)
         else {
             BikeScreenContent(navController = navController,
-                              bikeViewModel = bikeViewModel, paddingValues =paddingValues )
+                              bikeViewModel = bikeViewModel, paddingValues =paddingValues)
         }
     }
 }
@@ -64,11 +64,6 @@ fun BikeScreenContent(navController: NavController,
         modifier = Modifier
             .background(Black)
             .fillMaxSize()
-            .clickable(onClick = {
-                navController.navigate("bike_details_screen") {
-                    popUpTo("bike_screen")
-                }
-            })
     )
     {
 
@@ -76,12 +71,22 @@ fun BikeScreenContent(navController: NavController,
             BikeCard(
                 bikesList[index],
                 editClick = {
-                    navController.navigate("edit_bike_screen") {
+                    navController.navigate("edit_bike_screen/"+bikesList[index].bikeId) {
                         popUpTo("bike_screen")
                     }
-                }, deleteClick = {})
+                }, deleteClick = {bikeViewModel.deleteBike(bikesList[index])},
+                // is used 2 similar clickable functions because bike box contain it own
+                // onClick function; if we don't use first onClick, if we click on the middle
+                //of the item's list, we will be unable to open the bike details screen
+                onClick = {
+                        navController.navigate("bike_details_screen/"+bikesList[index].bikeId) {
+                            popUpTo("bike_screen")}
+                    },
+                    modifier = Modifier.clickable {
+                        navController.navigate("bike_details_screen/"+bikesList[index].bikeId) {
+                        popUpTo("bike_screen")
+                    }
+                    })
         }
     }
-
-
 }

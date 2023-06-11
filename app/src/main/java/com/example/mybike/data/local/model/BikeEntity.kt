@@ -12,5 +12,6 @@ import androidx.room.PrimaryKey
     val bikeType: String,
     val bikeColor: Int,
     val wheelSize: String,
-    val serviceIn: String
+    val serviceIn: String,
+    val defaultBike: Boolean
         )

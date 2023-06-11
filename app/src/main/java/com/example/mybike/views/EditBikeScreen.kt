@@ -21,12 +21,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mybike.R
 import com.example.mybike.components.BikeBuilder
@@ -35,16 +38,21 @@ import com.example.mybike.components.ColorsList
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.components.listBikeTypes
+import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.BikeViewModel
 
 @SuppressLint("Range")
 @Composable
-fun EditBikeScreen(navController: NavController) {
+fun EditBikeScreen(navController: NavController,
+                   bikeId: String,
+                   bikeViewModel: BikeViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -71,10 +79,14 @@ fun EditBikeScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
-            val bikeNameValue = remember { mutableStateOf(TextFieldValue("")) }
-            val wheelSizeValue = remember { mutableStateOf(TextFieldValue("29")) }
-            val serviceInValue = remember { mutableStateOf(TextFieldValue("")) }
-            val selectedColor = remember { mutableStateOf(BikeRed) }
+            val bikeEntity = bikeViewModel.getBikeById(bikeId.toInt())
+
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue(bikeEntity.bikeName)) }
+            val wheelSizeValue = remember { mutableStateOf(TextFieldValue(bikeEntity.wheelSize)) }
+            val serviceInValue = remember { mutableStateOf(TextFieldValue(bikeEntity.serviceIn)) }
+            val selectedColor = remember { mutableStateOf(Color(bikeEntity.bikeColor)) }
+            val selectedBike = remember { mutableStateOf(bikeEntity.bikeType) }
+            val defaultBike = remember { mutableStateOf(bikeEntity.defaultBike) }
             val (bikeBox,
                 colorsList,
                 bike,
@@ -102,7 +114,7 @@ fun EditBikeScreen(navController: NavController) {
                         .scale(1.2f)
                         .fillMaxWidth()
                         .constrainAs(backgroundWave) {
-                            centerVerticallyTo(parent,1.4f)
+                            centerVerticallyTo(parent, 1.4f)
                             bottom.linkTo(parent.bottom)
                             start.linkTo(parent.start)
                         })
@@ -126,22 +138,24 @@ fun EditBikeScreen(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .constrainAs(bike) {
-                            centerVerticallyTo(parent,1f)
+                            centerVerticallyTo(parent, 1f)
                             centerHorizontallyTo(parent, 0.45f)
                         }
                 ){
                     items(count = listOfBikes.size){index->
-                        BikeBuilder(bikeType = listOfBikes[index],
+                        BikeBuilder(bikeType = listBikeTypes.values.elementAt(index),
                             scaleSize = 1.8f,
                             bikeColor = selectedColor.value,
-                            onClick = {},
+                            onClick = {
+                                selectedBike.value = listBikeTypes.keys.elementAt(index)
+                            },
                             modifier = Modifier
                         )
                     }
                 }
 
                 Text(
-                    text = "Road Bike",
+                    text = selectedBike.value,
                     color = White,
                     fontSize = 17.sp,
                     modifier = Modifier
@@ -190,7 +204,8 @@ fun EditBikeScreen(navController: NavController) {
                     top.linkTo(serviceInField.bottom, 30.dp)
                     start.linkTo(parent.start, 17.dp)
                 })
-            SwitchButton(modifier = Modifier
+            SwitchButton(switchOn = defaultBike,
+                modifier = Modifier
                 .constrainAs(switchButton) {
                     top.linkTo(serviceInField.bottom, 19.dp)
                     end.linkTo(parent.end, 5.dp)
@@ -198,8 +213,19 @@ fun EditBikeScreen(navController: NavController) {
 
             Button(
                 onClick = {
+                    bikeViewModel.updateBike(
+                        BikeEntity(
+                            bikeId = bikeId.toInt(),
+                            bikeName = bikeNameValue.value.text,
+                            bikeType = selectedBike.value,
+                            bikeColor = selectedColor.value.toArgb(),
+                            wheelSize = wheelSizeValue.value.text,
+                            serviceIn = serviceInValue.value.text,
+                            defaultBike = defaultBike.value
+                        )
+                    )
                     navController.navigate("bike_screen") {
-//                    popUpTo("add_bike_screen")
+                    popUpTo("edit_bike_screen")
                     }
                 },
                 modifier = Modifier

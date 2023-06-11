@@ -17,6 +17,9 @@ interface RideDAO {
     @Query("SELECT * FROM ride_table")
     fun getAllRides(): List<RideEntity>
 
+    @Query("SELECT * FROM ride_table WHERE rideId = :rideId")
+    fun getRideById(rideId: Int): RideEntity
+
     @Update
     fun updateRide(ride: RideEntity)
 

@@ -78,11 +78,12 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                 .fillMaxSize(),
         )
         {
-            val bikeNameValue = remember { mutableStateOf(TextFieldValue("")) }
+            val bikeNameValue = remember { mutableStateOf(TextFieldValue("Nukeproof")) }
             val wheelSizeValue = remember { mutableStateOf(TextFieldValue("29")) }
-            val serviceInValue = remember { mutableStateOf(TextFieldValue("")) }
+            val serviceInValue = remember { mutableStateOf(TextFieldValue("1000")) }
             val selectedColor = remember { mutableStateOf(BikeRed) }
-            val selectedBike = remember { mutableStateOf("electric") }
+            val selectedBike = remember { mutableStateOf("Electric Bike") }
+            val defaultBike = remember { mutableStateOf(false) }
 
             val (bikeBox,
                 colorsList,
@@ -196,7 +197,8 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                     top.linkTo(serviceInField.bottom, 30.dp)
                     start.linkTo(parent.start, 17.dp)
                 })
-            SwitchButton(modifier = Modifier
+            SwitchButton(switchOn = defaultBike,
+                modifier = Modifier
                 .constrainAs(switchButton) {
                     top.linkTo(serviceInField.bottom, 19.dp)
                     end.linkTo(parent.end, 5.dp)
@@ -210,7 +212,8 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                             bikeType = selectedBike.value,
                             bikeColor = selectedColor.value.toArgb(),
                             wheelSize = wheelSizeValue.value.text,
-                            serviceIn = serviceInValue.value.text
+                            serviceIn = serviceInValue.value.text,
+                            defaultBike = defaultBike.value
                         )
                     )
                     navController.navigate("bike_screen") {

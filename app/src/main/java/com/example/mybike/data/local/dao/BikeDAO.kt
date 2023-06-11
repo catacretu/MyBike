@@ -17,6 +17,9 @@ interface BikeDAO {
     @Query("SELECT * FROM bike_table")
     fun getAllBikes(): List<BikeEntity>
 
+    @Query("SELECT * FROM bike_table WHERE bikeId = :bikeId")
+    fun getBikeById(bikeId: Int): BikeEntity
+
     @Update
     fun updateBike(bike: BikeEntity)
 

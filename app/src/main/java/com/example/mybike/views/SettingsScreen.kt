@@ -46,8 +46,9 @@ fun SettingsScreen(navController: NavController,
         {
             val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
             val distanceUnitValue = remember { mutableStateOf(TextFieldValue("KM")) }
-            val rideNameValue = remember { mutableStateOf(TextFieldValue("100km")) }
-            val defulatBikeValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }
+            val serviceReminderValue = remember { mutableStateOf(TextFieldValue("100km")) }
+            val enableServiceReminder = remember { mutableStateOf(true) }
+            val defaultBikeValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }
 
             val (distanceUnitField,
                 serviceReminderTextField,
@@ -65,7 +66,7 @@ fun SettingsScreen(navController: NavController,
             )
             TextFieldWithRequiredIcon(
                 fieldName = "Service Reminder",
-                fieldValue = rideNameValue,
+                fieldValue = serviceReminderValue,
                 withIcon = false,
                 modifierLayout = Modifier
                     .constrainAs(serviceReminderTextField) {
@@ -75,7 +76,8 @@ fun SettingsScreen(navController: NavController,
                 modifierTextField = Modifier.requiredWidth(360.dp)
             )
 
-            SwitchButton(modifier = Modifier
+            SwitchButton(switchOn = enableServiceReminder,
+                modifier = Modifier
                 .constrainAs(switchButton) {
                     top.linkTo(serviceReminderTextField.top, 40.dp)
                     start.linkTo(serviceReminderTextField.end)
@@ -83,7 +85,7 @@ fun SettingsScreen(navController: NavController,
 
             DropDownField(fieldName = "Default Bike",
                 listOfItems = listOfBikes,
-                selectedItem = defulatBikeValue,
+                selectedItem = defaultBikeValue,
                 modifier = Modifier
                     .constrainAs(defaultBike) {
                         top.linkTo(switchButton.bottom, 10.dp)

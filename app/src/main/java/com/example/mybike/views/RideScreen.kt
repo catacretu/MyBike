@@ -97,7 +97,7 @@ fun RideScreenContent(navController: NavController,
 
             items(key = {it},count = ridesList.size) {index->
                 RideCard(rideEntity = ridesList[index],
-                    editClick = {navController.navigate("edit_ride_screen"){
+                    editClick = {navController.navigate("edit_ride_screen/"+ridesList[index].rideId){
                         popUpTo("bike_screen")
                     }},
                     deleteClick = {rideViewModel.deleteRide(ridesList[index])})

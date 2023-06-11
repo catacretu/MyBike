@@ -16,6 +16,10 @@ class BikeRepositoryImpl @Inject constructor(
         return bikeDAO.getAllBikes()
     }
 
+    override fun getBikeById(bikeId: Int): BikeEntity {
+        return bikeDAO.getBikeById(bikeId)
+    }
+
     override fun updateBike(bikeEntity: BikeEntity) {
         bikeDAO.updateBike(bikeEntity)
     }
