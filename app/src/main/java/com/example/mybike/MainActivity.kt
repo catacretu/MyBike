@@ -9,12 +9,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.mybike.components.NavigationGraph
 import com.example.mybike.ui.theme.MyBikeTheme
+import com.example.mybike.viewmodel.BikeViewModel
 import com.example.mybike.viewmodel.RideViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val rideViewModel: RideViewModel by viewModels()
+    private val bikeViewModel: BikeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    NavigationGraph(rideViewModel)
+                    NavigationGraph(rideViewModel,bikeViewModel)
                 }
             }
         }

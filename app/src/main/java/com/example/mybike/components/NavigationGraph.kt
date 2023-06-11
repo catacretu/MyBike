@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mybike.viewmodel.BikeViewModel
 import com.example.mybike.viewmodel.RideViewModel
 import com.example.mybike.views.AddBikeScreen
 import com.example.mybike.views.AddRideScreen
@@ -17,7 +18,7 @@ import com.example.mybike.views.SettingsScreen
 import com.example.mybike.views.SplashScreen
 
 @Composable
-fun NavigationGraph(rideViewModel: RideViewModel) {
+fun NavigationGraph(rideViewModel: RideViewModel, bikeViewModel: BikeViewModel) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -32,10 +33,10 @@ fun NavigationGraph(rideViewModel: RideViewModel) {
             EmptyBikeScreen(navController = navController)
         }
         composable("bike_screen") {
-            BikeScreen(navController = navController)
+            BikeScreen(navController = navController, bikeViewModel)
         }
         composable("add_bike_screen") {
-            AddBikeScreen(navController = navController)
+            AddBikeScreen(navController = navController, bikeViewModel)
         }
         composable("edit_bike_screen") {
             EditBikeScreen(navController = navController)
@@ -50,7 +51,7 @@ fun NavigationGraph(rideViewModel: RideViewModel) {
         }
 
         composable("add_ride_screen") {
-            AddRideScreen(navController = navController)
+            AddRideScreen(navController = navController, rideViewModel)
         }
         composable("edit_ride_screen") {
             EditRideScreen(navController = navController)

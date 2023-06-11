@@ -4,6 +4,9 @@ import com.example.mybike.data.local.model.RideEntity
 
 interface RideRepository {
 
+    fun saveRide(rideEntity: RideEntity)
     fun getRides(): List<RideEntity>
+
+    fun updateRide(rideEntity: RideEntity)
     fun deleteRide(rideEntity: RideEntity)
 }

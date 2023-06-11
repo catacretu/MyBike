@@ -6,20 +6,21 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.mybike.data.local.model.RideEntity
+import com.example.mybike.data.local.model.BikeEntity
 
 @Dao
-interface RideDAO {
+interface BikeDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveRide(ride: RideEntity)
+    fun saveBike(bike: BikeEntity)
 
-    @Query("SELECT * FROM ride_table")
-    fun getAllRides(): List<RideEntity>
+    @Query("SELECT * FROM bike_table")
+    fun getAllBikes(): List<BikeEntity>
 
     @Update
-    fun updateRide(ride: RideEntity)
+    fun updateBike(bike: BikeEntity)
 
     @Delete
-    fun deleteRide(ride: RideEntity)
+    fun deleteBike(bike: BikeEntity)
+
 }

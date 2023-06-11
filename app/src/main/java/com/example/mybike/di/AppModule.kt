@@ -2,7 +2,10 @@ package com.example.mybike.di
 
 import android.content.Context
 import com.example.mybike.data.database.AppDatabase
+import com.example.mybike.data.local.dao.BikeDAO
 import com.example.mybike.data.local.dao.RideDAO
+import com.example.mybike.data.repository.BikeRepository
+import com.example.mybike.data.repository.BikeRepositoryImpl
 import com.example.mybike.data.repository.RideRepository
 import com.example.mybike.data.repository.RideRepositoryImpl
 import dagger.Module
@@ -24,6 +27,12 @@ object AppModule {
 
     @Provides
     @ViewModelScoped
+    fun provideBikeDAO(appDatabase: AppDatabase): BikeDAO {
+        return appDatabase.getBikeDAO()
+    }
+
+    @Provides
+    @ViewModelScoped
     fun provideRideDAO(appDatabase: AppDatabase): RideDAO {
         return appDatabase.getRideDAO()
     }
@@ -32,5 +41,11 @@ object AppModule {
     @ViewModelScoped
     fun provideRideRepository(rideDAO: RideDAO): RideRepository {
         return RideRepositoryImpl(rideDAO)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideBikeRepository(bikeDAO: BikeDAO): BikeRepository {
+        return BikeRepositoryImpl(bikeDAO)
     }
 }

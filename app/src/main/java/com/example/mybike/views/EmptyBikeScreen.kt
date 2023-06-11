@@ -31,16 +31,6 @@ import com.example.mybike.ui.theme.White
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun EmptyBikeScreen(navController: NavController) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Bikes", color = White) },
-                backgroundColor = Black
-            )
-        },
-        bottomBar = {
-            BottomBar(navController = navController)
-        }) {
 
         ConstraintLayout(
             modifier = Modifier
@@ -56,7 +46,7 @@ fun EmptyBikeScreen(navController: NavController) {
                     .padding(end = 10.dp)
                     .fillMaxWidth()
                     .constrainAs(missingBikeCard) {
-                        top.linkTo(parent.top, 5.dp)
+                        top.linkTo(parent.top, 55.dp)
                         start.linkTo(parent.start, 5.dp)
                     }
             )
@@ -111,5 +101,3 @@ fun EmptyBikeScreen(navController: NavController) {
 
         }
     }
-}
-

@@ -25,7 +25,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.core.graphics.toColorInt
 import com.example.mybike.R
+import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyProgressBar
@@ -33,9 +35,13 @@ import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun BikeCard(
+fun BikeCard(bikeEntity: BikeEntity,
              editClick: () -> Unit,
              deleteClick: () -> Unit) {
+    val listBikeTypes = mapOf("electric" to BikeType.ElectricBike,
+                              "hybrid" to BikeType.HybridBike,
+                              "mtb" to BikeType.MTBike,
+                              "road" to BikeType.RoadBike)
 
     ConstraintLayout(
         modifier = Modifier
@@ -81,15 +87,17 @@ fun BikeCard(
         MoreMenu(menuState = menuState, openDialog = openDialog,
             editClick = editClick, deleteClick = deleteClick)
 
-        BikeBuilder(bikeType = BikeType.MTBike,
-            scaleSize = 2f,
-            bikeColor = BikeRed,
-            modifier = Modifier
-                .constrainAs(bike) {
-                    centerVerticallyTo(parent, 0.5f)
-                    centerHorizontallyTo(parent, 0.45f)
+        listBikeTypes[bikeEntity.bikeType]?.let {
+            BikeBuilder(bikeType = it,
+                scaleSize = 2f,
+                bikeColor = BikeRed,
+                modifier = Modifier
+                    .constrainAs(bike) {
+                        centerVerticallyTo(parent, 0.5f)
+                        centerHorizontallyTo(parent, 0.45f)
 
-                })
+                    })
+        }
         Text(text = "Nukeproof Scout 290",
             color = White,
             fontSize = 20.sp,

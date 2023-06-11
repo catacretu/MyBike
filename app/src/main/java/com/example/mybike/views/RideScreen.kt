@@ -31,7 +31,6 @@ import com.example.mybike.viewmodel.RideViewModel
 @Composable
 fun RideScreen(navController: NavController,
                rideViewModel: RideViewModel) {
-//    val ridesList = rideViewModel.rideData.value
     Scaffold(
         topBar = {
             TopAppBar(
@@ -49,7 +48,7 @@ fun RideScreen(navController: NavController,
             BottomBar(navController = navController)
         }) {paddingValues ->
         if(rideViewModel.rideData.isEmpty())
-            EmptyRideScreen(navController = navController, ridesList = rideViewModel.rideData)
+            EmptyRideScreen(navController = navController)
         else
             RideScreenContent(navController = navController,
                 rideViewModel = rideViewModel,

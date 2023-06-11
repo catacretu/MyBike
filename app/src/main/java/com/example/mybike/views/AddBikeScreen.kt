@@ -34,16 +34,18 @@ import com.example.mybike.components.ColorsList
 import com.example.mybike.components.DropDownField
 import com.example.mybike.components.SwitchButton
 import com.example.mybike.components.TextFieldWithRequiredIcon
+import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.ui.theme.BikeRed
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.BikeViewModel
 
 @SuppressLint("Range")
 @Composable
-fun AddBikeScreen(navController: NavController) {
+fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -70,6 +72,11 @@ fun AddBikeScreen(navController: NavController) {
                 .fillMaxSize(),
         )
         {
+            val listOfBikes = listOf(
+                BikeType.ElectricBike,
+                BikeType.HybridBike,
+                BikeType.MTBike,
+                BikeType.RoadBike)
             val selectedColor = remember { mutableStateOf(BikeRed) }
             val (bikeBox,
                 colorsList,
@@ -111,11 +118,6 @@ fun AddBikeScreen(navController: NavController) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
                         })
-                val listOfBikes = listOf(
-                    BikeType.ElectricBike,
-                    BikeType.HybridBike,
-                    BikeType.MTBike,
-                    BikeType.RoadBike)
 
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(130.dp),
                     contentPadding = paddingValues,
@@ -192,8 +194,17 @@ fun AddBikeScreen(navController: NavController) {
 
             Button(
                 onClick = {
+                    bikeViewModel.saveBike(
+                        BikeEntity(
+                            bikeName = "NukeBike",
+                            bikeType = "mtb",
+                            bikeColor = "BikeRed",
+                            wheelSize = "29",
+                            serviceIn = "500km"
+                        )
+                    )
                     navController.navigate("bike_screen") {
-//                    popUpTo("add_bike_screen")
+                    popUpTo("add_bike_screen")
                     }
                 },
                 modifier = Modifier

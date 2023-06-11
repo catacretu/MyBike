@@ -29,19 +29,8 @@ import com.example.mybike.ui.theme.White
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun EmptyRideScreen(navController: NavController,
-                    ridesList: List<RideEntity>) {
+fun EmptyRideScreen(navController: NavController) {
 
-//    Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = { Text("Rides", color = White) },
-//                backgroundColor = Black
-//            )
-//        },
-//        bottomBar = {
-//            BottomBar(navController = navController)
-//        }) {
         ConstraintLayout(
             modifier = Modifier
                 .background(Black)
@@ -68,7 +57,7 @@ fun EmptyRideScreen(navController: NavController,
                     .scale(1.21f)
                     .height(470.dp)
                     .constrainAs(dotLine) {
-                        top.linkTo(missingRideCard.bottom, (-45).dp)
+                        top.linkTo(missingRideCard.bottom, (-35).dp)
                         start.linkTo(missingRideCard.start, 10.dp)
                         centerHorizontallyTo(parent, bias = 0.11F)
                     }
@@ -84,7 +73,7 @@ fun EmptyRideScreen(navController: NavController,
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp)
                     .constrainAs(addRideButton) {
-                        bottom.linkTo(parent.bottom, 80.dp)
+                        bottom.linkTo(parent.bottom, 90.dp)
                         start.linkTo(parent.start)
                     },
                 colors = ButtonDefaults.buttonColors(

@@ -26,10 +26,11 @@ import com.example.mybike.ui.theme.DarkBlue
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.LightBlue
 import com.example.mybike.ui.theme.White
+import com.example.mybike.viewmodel.RideViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AddRideScreen(navController: NavController) {
+fun AddRideScreen(navController: NavController, rideViewModel: RideViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -119,6 +120,7 @@ fun AddRideScreen(navController: NavController) {
 
             Button(
                 onClick = {
+
                     navController.navigate("ride_screen") {
                     popUpTo("add_ride_screen")
                     }
