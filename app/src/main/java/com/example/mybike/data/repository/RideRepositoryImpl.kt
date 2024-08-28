@@ -7,11 +7,11 @@ import javax.inject.Inject
 class RideRepositoryImpl @Inject constructor(
     private val rideDAO: RideDAO
 ) : RideRepository {
-    override fun saveRide(rideEntity: RideEntity) {
+    override suspend fun saveRide(rideEntity: RideEntity) {
         rideDAO.saveRide(rideEntity)
     }
 
-    override fun getRides(): List<RideEntity> {
+    override suspend fun getRides(): List<RideEntity> {
         return rideDAO.getAllRides()
     }
 
@@ -23,7 +23,7 @@ class RideRepositoryImpl @Inject constructor(
         rideDAO.updateRide(rideEntity)
     }
 
-    override fun deleteRide(rideEntity: RideEntity) {
+    override suspend fun deleteRide(rideEntity: RideEntity) {
         rideDAO.deleteRide(rideEntity)
     }
 }

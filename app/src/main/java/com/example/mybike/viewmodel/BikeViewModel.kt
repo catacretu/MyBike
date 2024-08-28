@@ -1,30 +1,39 @@
 package com.example.mybike.viewmodel
 
-import androidx.compose.runtime.toMutableStateList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mybike.data.local.model.BikeEntity
 import com.example.mybike.data.repository.BikeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BikeViewModel @Inject constructor(
     private val repository: BikeRepository
-): ViewModel() {
+) : ViewModel() {
 
-    private val _bikeData = fetchBikeData().toMutableStateList()
-
-    val bikeData: List<BikeEntity>
+    private val _bikeData = MutableLiveData<List<BikeEntity>>(emptyList())
+    val bikeData: LiveData<List<BikeEntity>>
         get() = _bikeData
 
-    fun saveBike(bikeEntity: BikeEntity){
-        repository.saveBike(bikeEntity)
+    init {
+        fetchBikeData()
     }
 
-    private fun fetchBikeData(): List<BikeEntity> {
-        return repository.getBikes()
-    }
+    fun saveBike(bikeEntity: BikeEntity) {
+        viewModelScope.launch {
+            repository.saveBike(bikeEntity)
+        }
 
+    }
+    fun fetchBikeData() {
+        viewModelScope.launch {
+            _bikeData.value = repository.getBikes()
+        }
+    }
     fun getBikeById(bikeId: Int): BikeEntity {
         return repository.getBikeById(bikeId)
     }
@@ -33,8 +42,10 @@ class BikeViewModel @Inject constructor(
         repository.updateBike(bikeEntity)
     }
 
-    fun deleteBike(bikeEntity: BikeEntity){
-        repository.deleteBike(bikeEntity)
+    fun deleteBike(bikeEntity: BikeEntity) {
+        viewModelScope.launch {
+            repository.deleteBike(bikeEntity)
+        }
     }
 
 }

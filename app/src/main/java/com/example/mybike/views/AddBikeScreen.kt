@@ -94,6 +94,7 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
 
             ConstraintLayout(modifier = Modifier
                 .height(270.dp)
+                .fillMaxWidth()
                 .background(Black)
                 .constrainAs(bikeBox) {
                     bottom.linkTo(bikeNameField.top)
@@ -105,7 +106,6 @@ fun AddBikeScreen(navController: NavController, bikeViewModel: BikeViewModel) {
                     colorFilter = ColorFilter.tint(DarkBlue),
                     modifier = Modifier
                         .scale(1.2f)
-                        .fillMaxWidth()
                         .constrainAs(backgroundWave) {
                             centerVerticallyTo(parent, 1.4f)
                             bottom.linkTo(parent.bottom)

@@ -12,10 +12,10 @@ import com.example.mybike.data.local.model.RideEntity
 interface RideDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveRide(ride: RideEntity)
+    suspend fun saveRide(ride: RideEntity)
 
     @Query("SELECT * FROM ride_table")
-    fun getAllRides(): List<RideEntity>
+    suspend fun getAllRides(): List<RideEntity>
 
     @Query("SELECT * FROM ride_table WHERE rideId = :rideId")
     fun getRideById(rideId: Int): RideEntity
@@ -24,5 +24,5 @@ interface RideDAO {
     fun updateRide(ride: RideEntity)
 
     @Delete
-    fun deleteRide(ride: RideEntity)
+    suspend fun deleteRide(ride: RideEntity)
 }

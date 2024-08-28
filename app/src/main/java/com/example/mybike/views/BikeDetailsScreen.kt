@@ -204,12 +204,12 @@ fun BikeDetailsScreen(navController: NavController,
                         }
                 ) {
 
-                    items(key = {it},count = ridesList.size) {index->
-                        RideCard(rideEntity = ridesList[index],
+                    items(key = {it},count = ridesList.value!!.size) {index->
+                        RideCard(rideEntity = ridesList.value!![index],
                             editClick = {navController.navigate("edit_ride_screen"){
                                 popUpTo("bike_screen")
                             }},
-                            deleteClick = {rideViewModel.deleteRide(ridesList[index])})
+                            deleteClick = {rideViewModel.deleteRide(ridesList.value!![index])})
 
                     }
                 }

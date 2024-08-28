@@ -14,6 +14,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,6 +25,7 @@ import com.example.mybike.components.buttons.AddButtonWithText
 import com.example.mybike.components.bottombar.BottomBar
 import com.example.mybike.components.RideCard
 import com.example.mybike.components.textcomponents.Title
+import com.example.mybike.data.local.model.RideEntity
 import com.example.mybike.ui.theme.Black
 import com.example.mybike.ui.theme.GreyBlue
 import com.example.mybike.ui.theme.MonthGrey
@@ -31,13 +35,19 @@ import com.example.mybike.viewmodel.RideViewModel
 @Composable
 fun RideScreen(navController: NavController,
                rideViewModel: RideViewModel) {
+
+    val ridesList by rideViewModel.rideData.observeAsState(emptyList())
+    LaunchedEffect (ridesList) {
+        rideViewModel.fetchRideData()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Title(text = "Rides") },
                 backgroundColor = Black,
                 actions = {
-                    if(rideViewModel.rideData.isNotEmpty())
+                    if(ridesList.isNotEmpty())
                         AddButtonWithText(text = "Add Ride")
                         {navController.navigate("add_ride_screen"){
                             popUpTo("ride_screen")
@@ -48,20 +58,22 @@ fun RideScreen(navController: NavController,
         bottomBar = {
             BottomBar(navController = navController)
         }) {paddingValues ->
-        if(rideViewModel.rideData.isEmpty())
+        if(ridesList.isEmpty())
             EmptyRideScreen(navController = navController)
         else
-            RideScreenContent(navController = navController,
+            RideScreenContent(
+                navController = navController,
                 rideViewModel = rideViewModel,
-                paddingValues)
+                ridesList = ridesList,
+                paddingValues = paddingValues)
     }
 }
 
 @Composable
 fun RideScreenContent(navController: NavController,
                       rideViewModel: RideViewModel,
+                      ridesList: List<RideEntity>,
                       paddingValues: PaddingValues) {
-    val ridesList = rideViewModel.rideData
     Column(
         modifier = Modifier
             .background(Black)
@@ -82,13 +94,6 @@ fun RideScreenContent(navController: NavController,
             fontSize = 20.sp,
             modifier = Modifier.padding(start = 10.dp, bottom = 5.dp)
         )
-
-//        LaunchedEffect(rideViewModel.rideData) {
-//            snapshotFlow { rideViewModel.rideData }
-//                .collect { newList ->
-//                     = newList
-//                }
-//        }
 
         LazyColumn(
             contentPadding = paddingValues,

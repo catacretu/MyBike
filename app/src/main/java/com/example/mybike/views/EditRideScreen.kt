@@ -67,7 +67,7 @@ fun EditRideScreen(navController: NavController,
         )
         {
             val rideEntity = rideViewModel.getRideById(rideId.toInt())
-            val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
+            val listOfBikes = bikeViewModel.bikeData.value!!.map{it.bikeName}.toTypedArray()
             val rideTitleValue = remember { mutableStateOf(TextFieldValue(rideEntity.rideTitle)) }
             val bikeNameValue = remember { mutableStateOf(TextFieldValue(rideEntity.bikeName)) }
             val distanceValue = remember { mutableStateOf(TextFieldValue(rideEntity.distance)) }

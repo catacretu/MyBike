@@ -44,7 +44,7 @@ fun SettingsScreen(navController: NavController,
                 .fillMaxSize(),
         )
         {
-            val listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
+            val listOfBikes = bikeViewModel.bikeData.value!!.map{it.bikeName}.toTypedArray()
             val distanceUnitValue = remember { mutableStateOf(TextFieldValue("KM")) }
             val serviceReminderValue = remember { mutableStateOf(TextFieldValue("100km")) }
             val enableServiceReminder = remember { mutableStateOf(true) }

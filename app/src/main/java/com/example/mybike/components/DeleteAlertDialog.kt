@@ -25,7 +25,11 @@ import com.example.mybike.ui.theme.OceanBlueColor
 import com.example.mybike.ui.theme.White
 
 @Composable
-fun DeleteAlertDialog(openDialog: MutableState<Boolean>) {
+fun DeleteAlertDialog(
+    openDialog: MutableState<Boolean>,
+    deleteClick: () -> Unit,
+    itemTitle: String
+) {
 //    var openDialog by remember { mutableStateOf(true)  }
 
     if (openDialog.value) {
@@ -42,7 +46,7 @@ fun DeleteAlertDialog(openDialog: MutableState<Boolean>) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "Nukeproof Scout 290\r\nwill be deleted.",
+                        text = "$itemTitle \r\nwill be deleted.",
                         color = White,
                         textAlign = TextAlign.Center,
                     )
@@ -76,6 +80,7 @@ fun DeleteAlertDialog(openDialog: MutableState<Boolean>) {
 
                     Button(
                         onClick = {
+                            deleteClick()
                             openDialog.value = false
                         },
                         colors = ButtonDefaults.buttonColors(

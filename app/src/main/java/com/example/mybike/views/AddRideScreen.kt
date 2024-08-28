@@ -64,8 +64,8 @@ fun AddRideScreen(navController: NavController,
         )
         {
             var listOfBikes = arrayOf("")
-            if(bikeViewModel.bikeData.isNotEmpty())
-                listOfBikes = bikeViewModel.bikeData.map{it.bikeName}.toTypedArray()
+            if(bikeViewModel.bikeData.value!!.isNotEmpty())
+                listOfBikes = bikeViewModel.bikeData.value!!.map{it.bikeName}.toTypedArray()
 
             val rideNameValue = remember { mutableStateOf(TextFieldValue("Faget MTB Tour")) }
             val bikeNameValue = remember { mutableStateOf(TextFieldValue(listOfBikes[0])) }

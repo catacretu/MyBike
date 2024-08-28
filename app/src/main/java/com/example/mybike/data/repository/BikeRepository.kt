@@ -4,14 +4,14 @@ import com.example.mybike.data.local.model.BikeEntity
 
 interface BikeRepository {
 
-    fun saveBike(bikeEntity: BikeEntity)
+    suspend fun saveBike(bikeEntity: BikeEntity)
 
-    fun getBikes(): List<BikeEntity>
+    suspend fun getBikes(): List<BikeEntity>
 
     fun getBikeById(bikeId: Int): BikeEntity
 
     fun updateBike(bikeEntity: BikeEntity)
 
-    fun deleteBike(bikeEntity: BikeEntity)
+    suspend fun deleteBike(bikeEntity: BikeEntity)
 
 }

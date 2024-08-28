@@ -8,11 +8,11 @@ class BikeRepositoryImpl @Inject constructor(
     private val bikeDAO: BikeDAO
     ): BikeRepository {
 
-    override fun saveBike(bikeEntity: BikeEntity) {
+    override suspend fun saveBike(bikeEntity: BikeEntity) {
         bikeDAO.saveBike(bikeEntity)
     }
 
-    override fun getBikes(): List<BikeEntity> {
+    override suspend fun getBikes(): List<BikeEntity> {
         return bikeDAO.getAllBikes()
     }
 
@@ -24,7 +24,7 @@ class BikeRepositoryImpl @Inject constructor(
         bikeDAO.updateBike(bikeEntity)
     }
 
-    override fun deleteBike(bikeEntity: BikeEntity) {
+    override suspend fun deleteBike(bikeEntity: BikeEntity) {
         bikeDAO.deleteBike(bikeEntity)
     }
 }

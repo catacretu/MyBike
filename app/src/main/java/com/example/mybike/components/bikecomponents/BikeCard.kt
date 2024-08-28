@@ -83,7 +83,7 @@ fun BikeCard(bikeEntity: BikeEntity,
             )
         }
         MoreMenu(menuState = menuState, openDialog = openDialog,
-            editClick = editClick, deleteClick = deleteClick)
+            editClick = editClick, deleteClick = deleteClick, itemTitle = bikeEntity.bikeName)
 
         listBikeTypes[bikeEntity.bikeType]?.let {
             BikeBuilder(bikeType = it,

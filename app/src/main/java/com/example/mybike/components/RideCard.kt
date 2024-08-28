@@ -81,7 +81,7 @@ fun RideCard(rideEntity: RideEntity,
                 tint = White
             )
         }
-        MoreMenu(menuState, openDialog,editClick,deleteClick)
+        MoreMenu(menuState, openDialog,editClick,deleteClick, rideEntity.rideTitle)
 
         TextWithValue(label = "Bike: ",
             value = rideEntity.bikeName,

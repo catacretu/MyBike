@@ -24,9 +24,10 @@ fun MoreMenu(
     menuState: MutableState<Boolean>,
     openDialog: MutableState<Boolean>,
     editClick: () -> Unit,
-    deleteClick: () -> Unit
+    deleteClick: () -> Unit,
+    itemTitle: String
 ) {
-    DeleteAlertDialog(openDialog)
+    DeleteAlertDialog(openDialog, deleteClick, itemTitle)
     DropdownMenu(
         expanded = menuState.value,
         onDismissRequest = { menuState.value = false },
@@ -56,9 +57,9 @@ fun MoreMenu(
         }
         DropdownMenuItem(
             onClick = {
-                deleteClick()
                 menuState.value = !menuState.value
                 openDialog.value = !openDialog.value
+
             }, modifier = Modifier
                 .width(90.dp)
                 .height(30.dp)
